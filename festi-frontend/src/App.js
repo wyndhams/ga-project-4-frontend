@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Router>
+        <Navbar
+          setSearchedFestivals={setSearchedFestivals}
+          searchedFestivals={searchedFestivals}
+        />
+
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/fesitvals' element={<AllFestivals />} />
+          <Route path='fesitvals/:id' element={<SingleFesitval />} />
+          <Route path='/fesitvals' element={<SelectedMuscleFesitvalsList />} />
+          <Route path='/fesitvals/create' element={<CreateFesitval />} />
+          <Route path='fesitval-log' element={<FesitvalLog />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/account' element={<Account />} />
+        </Routes>
+      </Router> */}
+    </>
   );
 }
 
