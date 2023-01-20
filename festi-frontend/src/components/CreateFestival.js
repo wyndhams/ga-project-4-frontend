@@ -5,10 +5,10 @@ import {
   Container,
   Box,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  // FormControl,
+  // InputLabel,
+  // Select,
+  // MenuItem,
 } from '@mui/material';
 import { API } from '../lib/api';
 // import HomeImage from '../assets/home-background.png';
@@ -76,7 +76,7 @@ export default function CreateFestival() {
 
   return (
     <>
-      <h1>ADD Festival</h1>
+      <h1>Create Festival</h1>
       {/* <img src={HomeImage} alt='Fesitval Image' /> */}
 
       <Container
@@ -107,6 +107,8 @@ export default function CreateFestival() {
               name='description'
             />
           </Box>
+
+          <div>{festivals.name}</div>
 
           <Button type='submit'>Create New Festival</Button>
         </form>
