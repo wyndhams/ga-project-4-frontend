@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 // import HomeImage from '../assets/home-background.png';
-import '../styles/Home.scss';
+// import '../styles/Home.scss';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -30,7 +30,7 @@ const Home = () => (
       >
         <Link
           style={{ color: 'inherit', textDecoration: 'inherit' }}
-          to='/workout-directory'
+          to='/festivals'
         >
           <Button
             className='homeButton'

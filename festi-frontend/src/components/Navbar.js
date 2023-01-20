@@ -1,23 +1,22 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useAuthenticated } from '../hooks/useAuthenticated';
-// import { AUTH } from '../lib/auth';
+import { useAuthenticated } from '../hooks/useAuthenticated';
+import { AUTH } from '../lib/auth';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 // import Switch from '@mui/material/Switch';
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import Logo from '../assets/logo-small-white.png';
+// import Logo from '../assets/logo-small-white.png';
 
-const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
-  const [auth, setAuth] = React.useState(true);
+const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
+  // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useAuthenticated();
@@ -28,9 +27,9 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
     navigate('/');
   };
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,8 +53,8 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                   height: 50,
                   width: 200,
                 }}
-                alt='Full stacked logo.'
-                src={Logo}
+                alt='Festi logo.'
+                // src={Logo}
               />
             </Link>
           </Typography>
@@ -69,9 +68,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
               aria-haspopup='true'
               onClick={handleMenu}
               color='primary'
-            >
-              <MenuIcon />
-            </IconButton>
+            ></IconButton>
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -105,7 +102,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
               <MenuItem onClick={handleClose}>
                 <Link
                   style={{ color: 'inherit', textDecoration: 'inherit' }}
-                  to='/workouts'
+                  to='/fesitvals'
                 >
                   <Typography
                     variant='h6'
@@ -113,37 +110,7 @@ const Navbar = ({ setSearchedWorkouts, SearchedWorkouts }) => {
                     component='div'
                     sx={{ mr: 2 }}
                   >
-                    Workouts
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link
-                  style={{ color: 'inherit', textDecoration: 'inherit' }}
-                  to='/workout-directory'
-                >
-                  <Typography
-                    variant='h6'
-                    color='inherit'
-                    component='div'
-                    sx={{ mr: 2 }}
-                  >
-                    Muscle Groups
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link
-                  style={{ color: 'inherit', textDecoration: 'inherit' }}
-                  to='/workout-log'
-                >
-                  <Typography
-                    variant='h6'
-                    color='inherit'
-                    component='div'
-                    sx={{ mr: 2 }}
-                  >
-                    Workout Log
+                    Festivals
                   </Typography>
                 </Link>
               </MenuItem>

@@ -6,8 +6,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // import Likes from './common/Likes';
 
-import '../styles/images.scss';
-
 import {
   Container,
   Box,

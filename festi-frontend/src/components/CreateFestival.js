@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import { API } from '../lib/api';
 // import HomeImage from '../assets/home-background.png';
-import '../styles/Createstyle.scss';
 
 export default function CreateFestival() {
   const navigate = useNavigate();

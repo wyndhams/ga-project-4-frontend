@@ -131,7 +131,7 @@ const Account = () => (
                   fontSize: 50,
                 }}
               >
-                Ulas Temel
+                Wyndham Roy
               </Typography>
             </Box>
           </Stack>
@@ -155,21 +155,20 @@ const Account = () => (
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell align='left'>Height&nbsp;(cm)</TableCell>
-                  <TableCell align='left'>Weight&nbsp;(kg)</TableCell>
-                  <TableCell align='left'>BMI&nbsp;</TableCell>
+                  <TableCell align='left'>Username</TableCell>
+                  <TableCell align='left'>Email</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {/* {rows.map((row) => (
                   <TableRow
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell align='left'>&ensp;{row.height}</TableCell>
+                    <TableCell align='left'>&ensp;{}</TableCell>
                     <TableCell align='left'>&ensp;{row.weight}</TableCell>
                     <TableCell align='left'>&ensp;{row.bmi}</TableCell>
                   </TableRow>
-                ))}
+                ))} */}
               </TableBody>
             </Table>
           </TableContainer>

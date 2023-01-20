@@ -17,8 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
 import { NOTIFY } from '../lib/notifications';
-import '../styles/RegisterStyling.scss';
-import Abs from '../assets/abs.png';
+// import '../styles/RegisterStyling.scss';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -71,7 +70,7 @@ export default function Register() {
       AUTH.setToken(loginData.data.token);
 
       NOTIFY.SUCCESS('Login Success💪🏼');
-      navigate('/workouts');
+      navigate('/festivals');
     } catch (error) {
       console.log(error);
       setError(true);
@@ -82,7 +81,7 @@ export default function Register() {
 
   return (
     <>
-      <img className='form' src={Abs} alt='pull-ups' />
+      <img className='form' alt='festival' />
       <ThemeProvider theme={theme}>
         <Container component='main' maxWidth='xs'>
           <CssBaseline />
@@ -210,7 +209,7 @@ export default function Register() {
                     control={
                       <Checkbox value='allowExtraEmails' color='primary' />
                     }
-                    label='Spam me with workout info 🏋🏽‍♀️ '
+                    label='Spam me with festivals'
                   />
                 </Grid>
               </Grid>

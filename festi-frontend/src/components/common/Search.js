@@ -1,4 +1,4 @@
-import '../../styles/images.scss';
+// import '../../styles/images.scss';
 
 function Search({ value, handleChange }) {
   const handleInputChange = (e) => handleChange(e.target.value);
@@ -15,7 +15,7 @@ function Search({ value, handleChange }) {
             <input
               type='search'
               className='searchInput'
-              placeholder='SEARCH FOR YOUR WORKOUT🔎'
+              placeholder='SEARCH FOR YOUR FESTIVAL🔎'
               value={value}
               onChange={handleInputChange}
             />

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { styled } from '@mui/material/styles';
-import { Container, Grid, Paper, Box, CardMedia } from '@mui/material';
-import '../styles/images.scss';
+import { Container, Grid, Paper, Box } from '@mui/material';
+// import '../styles/images.scss';
 import { useNavigate } from 'react-router-dom';
 import FestivalCard from './common/FestivalCard';
 import Search from './common/Search';

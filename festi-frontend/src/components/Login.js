@@ -5,7 +5,7 @@ import { NOTIFY } from '../lib/notifications';
 import { AUTH } from '../lib/auth';
 // import { useAuthenticated } from '../hooks/useAuthenticated';
 
-import LoginText from '../assets/login-black.png';
+// import LoginText from '../assets/login-black.png';
 
 import {
   // Avatar,
@@ -42,7 +42,7 @@ const Login = () => {
       .then(({ data }) => {
         NOTIFY.SUCCESS('You are now logged in!');
         AUTH.setToken(data.token);
-        navigate('/workout-directory');
+        navigate('/festivals');
       })
       .catch((e) => {
         console.log(e);
@@ -68,7 +68,7 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://i.postimg.cc/prYb3y3S/login.png)',
+            // backgroundImage: 'url(https://i.postimg.cc/prYb3y3S/login.png)',
             backgroundRepeat: 'no-repeat',
             // backgroundColor: (t) =>
             //   t.palette.mode === 'light'
@@ -101,7 +101,7 @@ const Login = () => {
                 width: 400,
               }}
               alt='lLogin text'
-              src={LoginText}
+              // src={LoginText}
             />
             <Box
               component='form'
