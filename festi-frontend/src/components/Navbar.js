@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthenticated } from '../hooks/useAuthenticated';
 import { AUTH } from '../lib/auth';
@@ -13,11 +13,11 @@ import IconButton from '@mui/material/IconButton';
 // import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import Logo from '../assets/logo-small-white.png';
+import Logo from '../assets/logo.png';
 
 const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
   // const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useAuthenticated();
 
@@ -41,20 +41,20 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='fixed' color='error'>
+      <AppBar position='fixed' color='primary'>
         <Toolbar>
           {/* logo */}
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
             <Link to='/'>
               <Box
                 component='img'
                 sx={{
-                  mt: 4,
-                  height: 50,
-                  width: 200,
+                  mt: 1,
+                  height: 70,
+                  width: 103.54,
                 }}
                 alt='Festi logo.'
-                // src={Logo}
+                src={Logo}
               />
             </Link>
           </Typography>
@@ -86,7 +86,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
             >
               <MenuItem onClick={handleClose}>
                 <Link
-                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  style={{ color: 'primary', textDecoration: 'inherit' }}
                   to='/'
                 >
                   <Typography
@@ -101,7 +101,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link
-                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  style={{ color: 'secondary', textDecoration: 'inherit' }}
                   to='/festivals'
                 >
                   <Typography

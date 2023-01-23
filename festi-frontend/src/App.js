@@ -10,8 +10,19 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Account from './components/Account';
 
+import { createTheme, ThemeProvider } from '@mui/material';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+      light: '',
+    },
+  },
+});
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -19,11 +30,12 @@ function App() {
   const [searchedFestivals, setSearchedFestivals] = useState(null);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Router>
         <Navbar
           setSearchedFestivals={setSearchedFestivals}
           searchedFestivals={searchedFestivals}
+          position='sticky'
         />
 
         <Routes>
@@ -36,7 +48,7 @@ function App() {
           <Route path='/account' element={<Account />} />
         </Routes>
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 
