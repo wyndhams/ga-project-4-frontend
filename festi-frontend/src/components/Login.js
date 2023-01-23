@@ -104,7 +104,7 @@ const Login = () => {
                 height: 100,
                 width: 400,
               }}
-              alt='lLogin text'
+              alt='Login text'
               // src={LoginText}
             />
             <Box
