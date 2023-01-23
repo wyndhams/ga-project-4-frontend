@@ -56,6 +56,7 @@ const AllFestivals = ({ searchedFestivals }) => {
   const handleClick = (id) => {
     navigate(`/festivals/${id}`);
   };
+
   return (
     <>
       <Box
@@ -95,6 +96,8 @@ const AllFestivals = ({ searchedFestivals }) => {
                       image={festival.image}
                     ></FestivalCard>
                     {festival.name}
+                    {festival.artist}
+                    {festival.genres}
                   </Item>
 
                   {/* <Item id={festival._id}>

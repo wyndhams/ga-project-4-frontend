@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -22,45 +20,46 @@ import { NOTIFY } from '../lib/notifications';
 export default function Register() {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
+    profile_image: '',
     password: '',
-    passwordConfirmation: '',
+    password_confirmation: '',
   });
 
-  const [file, setFile] = useState('');
+  // const [file, setFile] = useState('');
   const [error, setError] = useState(false);
 
   const handleChange = (e) =>
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
 
-  const handleFileChange = (e) => {
-    e.preventDefault();
-    setFile(e.target.files[0]);
-  };
+  // const handleFileChange = (e) => {
+  //   e.preventDefault();
+  //   setFile(e.target.files[0]);
+  // };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    const imageData = new FormData();
-    imageData.append('file', file);
-    imageData.append(
-      'upload_preset',
-      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-    );
+    // const imageData = new FormData();
+    // imageData.append('file', file);
+    // imageData.append(
+    //   'upload_preset',
+    //   process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    // );
 
     try {
-      const cloudinaryResponse = await API.POST(
-        API.ENDPOINTS.cloudinary,
-        imageData
-      );
+      //   const cloudinaryResponse = await API.POST(
+      //     API.ENDPOINTS.cloudinary,
+      //     imageData
+      //   );
 
-      const apiReqBody = {
-        ...formFields,
-        cloudinaryImageId: cloudinaryResponse.data.public_id,
-      };
-      await API.POST(API.ENDPOINTS.register, apiReqBody);
+      // const apiReqBody = {
+      //   ...formFields,
+      // cloudinaryImageId: cloudinaryResponse.data.public_id,
+      // };
+      await API.POST(API.ENDPOINTS.register); // (, apiReqBody)
 
       const loginData = await API.POST(API.ENDPOINTS.login, {
         email: formFields.email,
@@ -69,7 +68,8 @@ export default function Register() {
 
       AUTH.setToken(loginData.data.token);
 
-      NOTIFY.SUCCESS('Login Success💪🏼');
+      NOTIFY.SUCCESS(loginData.data.message);
+
       navigate('/festivals');
     } catch (error) {
       console.log(error);
@@ -78,6 +78,10 @@ export default function Register() {
   };
 
   const theme = createTheme();
+
+  const handleAlreadyRegistered = (e) => {
+    navigate('/login/');
+  };
 
   return (
     <>
@@ -112,13 +116,13 @@ export default function Register() {
                   <TextField
                     className='textfield'
                     autoComplete='given-name'
-                    name='firstName'
+                    name='first_name'
                     required
                     fullWidth
-                    id='firstName'
+                    id='first_name'
                     type='text'
                     label='First Name'
-                    value={formFields.firstName}
+                    value={formFields.first_name}
                     onChange={handleChange}
                     error={error}
                     autoFocus
@@ -130,13 +134,13 @@ export default function Register() {
                     className='textfield'
                     required
                     fullWidth
-                    id='lastName'
+                    id='last_name'
                     type='text'
                     label='Last Name'
-                    value={formFields.lastName}
+                    value={formFields.last_name}
                     onChange={handleChange}
                     error={error}
-                    name='lastName'
+                    name='last_name'
                     autoComplete='family-name'
                   />
                 </Grid>
@@ -177,6 +181,21 @@ export default function Register() {
                     className='textfield'
                     required
                     fullWidth
+                    name='profile_image'
+                    id='profile_image'
+                    label='Image Link'
+                    type='text'
+                    value={formFields.profile_image}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    className='textfield'
+                    required
+                    fullWidth
                     name='password'
                     label='Password'
                     type='password'
@@ -193,17 +212,17 @@ export default function Register() {
                     className='textfield'
                     required
                     fullWidth
-                    name='passwordConfirmation'
+                    name='password_confirmation'
                     label='Password Confirmation'
                     type='password'
-                    id='passwordConfirmation'
-                    value={formFields.passwordConfirmation}
+                    id='password_confirmation'
+                    value={formFields.password_confirmation}
                     onChange={handleChange}
                     error={error}
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <FormControlLabel
                     className='text'
                     control={
@@ -211,19 +230,7 @@ export default function Register() {
                     }
                     label='Spam me with festivals'
                   />
-                </Grid>
-              </Grid>
-
-              <Grid>
-                <TextField
-                  className='textfield'
-                  size='small'
-                  name='profile-picture'
-                  id='profile-picture'
-                  type='file'
-                  onChange={handleFileChange}
-                  sx={{ mb: 2 }}
-                />
+                </Grid> */}
               </Grid>
               <Button
                 type='submit'
@@ -231,12 +238,16 @@ export default function Register() {
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register{' '}
+                Register
               </Button>
 
               <Grid container justifyContent='flex-end'>
                 <Grid item>
-                  <Link href='#' variant='body2'>
+                  <Link
+                    href='#'
+                    variant='body2'
+                    onClick={handleAlreadyRegistered}
+                  >
                     Already have an account? Sign in
                   </Link>
                 </Grid>

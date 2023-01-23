@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { NOTIFY } from '../lib/notifications';
 import { AUTH } from '../lib/auth';
-// import { useAuthenticated } from '../hooks/useAuthenticated';
+import { useAuthenticated } from '../hooks/useAuthenticated';
 
 // import LoginText from '../assets/login-black.png';
 
@@ -30,11 +30,11 @@ const Login = () => {
   });
 
   const [error, setError] = useState({ email: false, password: false });
-  // const [isLoggedIn] = useAuthenticated();
+  const [isLoggedIn] = useAuthenticated();
 
-  // if (isLoggedIn) {
-  //   navigate('/');
-  // }
+  if (isLoggedIn) {
+    navigate('/');
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ const Login = () => {
       .then(({ data }) => {
         NOTIFY.SUCCESS('You are now logged in!');
         AUTH.setToken(data.token);
-        navigate('/festivals');
+        navigate('/festivals/');
       })
       .catch((e) => {
         console.log(e);
@@ -56,6 +56,10 @@ const Login = () => {
 
   const handleChange = (e) => {
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
+  };
+
+  const handleNotRegistered = (e) => {
+    navigate('/register/');
   };
 
   return (
@@ -151,7 +155,7 @@ const Login = () => {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href='#' variant='body2'>
+                  <Link href='#' variant='body2' onClick={handleNotRegistered}>
                     {"Don't have an account? Register"}
                   </Link>
                 </Grid>

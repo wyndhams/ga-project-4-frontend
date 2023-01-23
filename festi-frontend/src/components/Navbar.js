@@ -102,7 +102,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
               <MenuItem onClick={handleClose}>
                 <Link
                   style={{ color: 'inherit', textDecoration: 'inherit' }}
-                  to='/fesitvals'
+                  to='/festivals'
                 >
                   <Typography
                     variant='h6'

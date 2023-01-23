@@ -76,7 +76,7 @@ export default function CreateFestival() {
   return (
     <>
       <h1>Create Festival</h1>
-      {/* <img src={HomeImage} alt='Fesitval Image' /> */}
+      {/* <img src={HomeImage} alt='Festival Image' /> */}
 
       <Container
         maxWidth='lg'

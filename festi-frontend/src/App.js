@@ -13,6 +13,8 @@ import Account from './components/Account';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
+window.Buffer = window.Buffer || require('buffer').Buffer;
+
 function App() {
   const [searchedFestivals, setSearchedFestivals] = useState(null);
 
@@ -26,9 +28,9 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/fesitvals' element={<AllFestivals />} />
-          <Route path='fesitvals/:id' element={<SingleFestival />} />
-          <Route path='/fesitvals/create' element={<CreateFestival />} />
+          <Route path='/festivals' element={<AllFestivals />} />
+          <Route path='festivals/:id' element={<SingleFestival />} />
+          <Route path='/festivals/create' element={<CreateFestival />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account />} />

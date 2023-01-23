@@ -10,10 +10,9 @@ import {
 
 export default function FestivalCard({
   name,
-  image,
-  muscleGroup,
-  difficulty,
-  totalTime,
+  cover_image,
+  genres,
+  artist,
   id,
 }) {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ export default function FestivalCard({
       <CardActionArea onClick={navigateToFestival}>
         <CardMedia
           component='img'
-          image={image}
+          image={cover_image}
           alt={name}
           sx={{ maxHeight: 345, objectFit: 'contain' }}
         />
@@ -34,15 +33,11 @@ export default function FestivalCard({
           </Typography>
 
           <Typography variant='body2' color='text.secondary'>
-            {muscleGroup}
+            {genres}
           </Typography>
 
           <Typography variant='body2' color='text.secondary'>
-            {difficulty}
-          </Typography>
-
-          <Typography variant='body2' color='text.secondary'>
-            {totalTime}
+            {artist}
           </Typography>
         </CardContent>
       </CardActionArea>
