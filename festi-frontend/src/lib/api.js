@@ -2,12 +2,8 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  allFestivals: '/api/festivals',
+  allFestivals: '/api/festivals/',
   singleFestival: (id) => `/api/festivals/${id}`,
-  festivalDirectory: '/api/festival-directory',
-  festivalsBySelectedMuscleGroup: `/api/festival-directory/festivals`,
-  selectedFestival: `/api/festival-log`,
-  festivalLog: '/api/festival-log',
   account: (userId) => `/api/account/${userId}`,
   createReview: (id) => `/api/festivals/${id}/reviews`,
   singleReview: (festivalId, reviewId) =>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { styled } from '@mui/material/styles';
-import { Container, Grid, Paper, Box } from '@mui/material';
+import { Button, Container, Grid, Paper } from '@mui/material';
 // import '../styles/images.scss';
 import { useNavigate } from 'react-router-dom';
 import FestivalCard from './common/FestivalCard';
@@ -55,27 +55,14 @@ const AllFestivals = ({ searchedFestivals }) => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
+    console.log(id);
     navigate(`/festivals/${id}`);
   };
 
+  const handleCreateFestival = (e) => navigate('/festivals/create');
+
   return (
     <>
-      <Box
-        component='img'
-        sx={{
-          position: 'absolute',
-          top: '8vh',
-          justify: 'center',
-          left: '40%',
-          // zIndex: 'tooltip',
-          mt: 4,
-          mb: 20,
-          height: 100,
-          width: 400,
-        }}
-        alt='Heading'
-        // src={allFestivals}
-      />
       <div className='background'>
         <Search value={searchQuery} handleChange={setSearchQuery} />
         <Container className='margins' maxWidth='lg'>
@@ -85,25 +72,33 @@ const AllFestivals = ({ searchedFestivals }) => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             justifyContent='center'
             alignItems='center'
-            onClick={handleClick}
           >
             {festivals &&
               filterFestivals().map((festival) => (
-                <Grid item xs={6} key={festival._id}>
-                  <Item className='hover'>
+                <Grid item xs={6} key={festival.id}>
+                  <Item
+                    className='hover'
+                    onClick={() => handleClick(festival.id)}
+                  >
                     <FestivalCard
                       component='img'
                       sx={{ height: 20, width: 230 }}
-                      image={festival.image}
+                      image={festival.cover_image}
                     ></FestivalCard>
                     {festival.name}
-                    {festival.artist}
-                    {festival.genres}
-                    {/* {festival.country} */}
+                    {festival.country}
                   </Item>
                 </Grid>
               ))}
           </Grid>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            onClick={handleCreateFestival}
+          >
+            Create New Festival
+          </Button>
         </Container>
       </div>
     </>

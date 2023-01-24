@@ -9,12 +9,12 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
 import { NOTIFY } from '../lib/notifications';
+import { Checkbox, FormControlLabel } from '@mui/material';
 // import '../styles/RegisterStyling.scss';
 
 export default function Register() {
@@ -24,42 +24,42 @@ export default function Register() {
     last_name: '',
     username: '',
     email: '',
-    profile_image: '',
     password: '',
     password_confirmation: '',
   });
 
-  // const [file, setFile] = useState('');
+  const [file, setFile] = useState('');
   const [error, setError] = useState(false);
 
   const handleChange = (e) =>
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
 
-  // const handleFileChange = (e) => {
-  //   e.preventDefault();
-  //   setFile(e.target.files[0]);
-  // };
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    // const imageData = new FormData();
-    // imageData.append('file', file);
-    // imageData.append(
-    //   'upload_preset',
-    //   process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-    // );
+    const imageData = new FormData();
+    imageData.append('file', file);
+    imageData.append(
+      'upload_preset',
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    );
 
     try {
-      //   const cloudinaryResponse = await API.POST(
-      //     API.ENDPOINTS.cloudinary,
-      //     imageData
-      //   );
+      const cloudinaryResponse = await API.POST(
+        API.ENDPOINTS.cloudinary,
+        imageData
+      );
 
-      // const apiReqBody = {
-      //   ...formFields,
-      // cloudinaryImageId: cloudinaryResponse.data.public_id,
-      // };
-      await API.POST(API.ENDPOINTS.register); // (, apiReqBody)
+      const apiReqBody = {
+        ...formFields,
+        profile_image: cloudinaryResponse.data.public_id,
+      };
+      console.log(apiReqBody);
+      await API.POST(API.ENDPOINTS.register, apiReqBody);
 
       const loginData = await API.POST(API.ENDPOINTS.login, {
         email: formFields.email,
@@ -70,14 +70,12 @@ export default function Register() {
 
       NOTIFY.SUCCESS(loginData.data.message);
 
-      navigate('/festivals');
+      navigate('/');
     } catch (error) {
       console.log(error);
       setError(true);
     }
   };
-
-  const theme = createTheme();
 
   const handleAlreadyRegistered = (e) => {
     navigate('/login/');
@@ -86,13 +84,12 @@ export default function Register() {
   return (
     <>
       <img className='form' alt='festival' />
-      <ThemeProvider theme={theme}>
-        <Container component='main' maxWidth='xs'>
-          <CssBaseline />
-          {/* <form onSubmit={handleCreateUser}> */}
+      <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <form onSubmit={handleCreateUser}>
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 20,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -104,159 +101,147 @@ export default function Register() {
             <Typography component='h1' variant='h5' className='text'>
               Register{' '}
             </Typography>
-            <Box
-              className='form'
-              component='form'
-              noValidate
-              onSubmit={handleCreateUser}
-              sx={{ mt: 3 }}
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className='textfield'
+                  autoComplete='given-name'
+                  name='first_name'
+                  required
+                  fullWidth
+                  id='first_name'
+                  type='text'
+                  label='First Name'
+                  value={formFields.first_name}
+                  onChange={handleChange}
+                  error={error}
+                  autoFocus
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  id='last_name'
+                  type='text'
+                  label='Last Name'
+                  value={formFields.last_name}
+                  onChange={handleChange}
+                  error={error}
+                  name='last_name'
+                  autoComplete='family-name'
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  id='username'
+                  label='Username'
+                  name='username'
+                  type='text'
+                  value={formFields.username}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  id='email'
+                  type='email'
+                  label='Email Address'
+                  name='email'
+                  autoComplete='email'
+                  value={formFields.email}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='new-password'
+                  value={formFields.password}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  name='password_confirmation'
+                  label='Password Confirmation'
+                  type='password'
+                  id='password_confirmation'
+                  value={formFields.password_confirmation}
+                  onChange={handleChange}
+                  error={error}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className='textfield'
+                  required
+                  fullWidth
+                  name='profile_image'
+                  id='profile_image'
+                  type='file'
+                  onChange={handleFileChange}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  className='text'
+                  control={
+                    <Checkbox value='allowExtraEmails' color='primary' />
+                  }
+                  label='I want to get updates about new festivals!'
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              sx={{ mt: 3, mb: 2 }}
             >
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    className='textfield'
-                    autoComplete='given-name'
-                    name='first_name'
-                    required
-                    fullWidth
-                    id='first_name'
-                    type='text'
-                    label='First Name'
-                    value={formFields.first_name}
-                    onChange={handleChange}
-                    error={error}
-                    autoFocus
-                  />
-                </Grid>
+              Register
+            </Button>
 
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    id='last_name'
-                    type='text'
-                    label='Last Name'
-                    value={formFields.last_name}
-                    onChange={handleChange}
-                    error={error}
-                    name='last_name'
-                    autoComplete='family-name'
-                  />
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    id='username'
-                    label='Username'
-                    name='username'
-                    type='text'
-                    value={formFields.username}
-                    onChange={handleChange}
-                    error={error}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    id='email'
-                    type='email'
-                    label='Email Address'
-                    name='email'
-                    autoComplete='email'
-                    value={formFields.email}
-                    onChange={handleChange}
-                    error={error}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    name='profile_image'
-                    id='profile_image'
-                    label=' Link'
-                    type='text'
-                    value={formFields.profile_image}
-                    onChange={handleChange}
-                    error={error}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    name='password'
-                    label='Password'
-                    type='password'
-                    id='password'
-                    autoComplete='new-password'
-                    value={formFields.password}
-                    onChange={handleChange}
-                    error={error}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    className='textfield'
-                    required
-                    fullWidth
-                    name='password_confirmation'
-                    label='Password Confirmation'
-                    type='password'
-                    id='password_confirmation'
-                    value={formFields.password_confirmation}
-                    onChange={handleChange}
-                    error={error}
-                  />
-                </Grid>
-
-                {/* <Grid item xs={12}>
-                  <FormControlLabel
-                    className='text'
-                    control={
-                      <Checkbox value='allowExtraEmails' color='primary' />
-                    }
-                    label='Spam me with festivals'
-                  />
-                </Grid> */}
+            <Grid container justifyContent='flex-end'>
+              <Grid item>
+                <Link
+                  href='#'
+                  variant='body2'
+                  onClick={handleAlreadyRegistered}
+                >
+                  Already have an account? Sign in
+                </Link>
               </Grid>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Register
-              </Button>
-
-              <Grid container justifyContent='flex-end'>
-                <Grid item>
-                  <Link
-                    href='#'
-                    variant='body2'
-                    onClick={handleAlreadyRegistered}
-                  >
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
+            </Grid>
           </Box>
-          {/* </form> */}
-        </Container>
-      </ThemeProvider>
+        </form>
+      </Container>
     </>
   );
 }

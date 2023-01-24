@@ -119,6 +119,21 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
                   <MenuItem onClick={handleClose}>
                     <Link
                       style={{ color: 'inherit', textDecoration: 'inherit' }}
+                      to='/festivals/create'
+                    >
+                      <Typography
+                        variant='h6'
+                        color='inherit'
+                        component='div'
+                        sx={{ mr: 2 }}
+                      >
+                        Create Festival
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'inherit' }}
                       to='/'
                       onClick={logout}
                     >
