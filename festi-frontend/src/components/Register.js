@@ -183,7 +183,7 @@ export default function Register() {
                     fullWidth
                     name='profile_image'
                     id='profile_image'
-                    label='Image Link'
+                    label=' Link'
                     type='text'
                     value={formFields.profile_image}
                     onChange={handleChange}

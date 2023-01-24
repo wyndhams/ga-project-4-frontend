@@ -53,6 +53,7 @@ const AllFestivals = ({ searchedFestivals }) => {
   }, [searchedFestivals]);
 
   const navigate = useNavigate();
+
   const handleClick = (id) => {
     navigate(`/festivals/${id}`);
   };
@@ -98,18 +99,8 @@ const AllFestivals = ({ searchedFestivals }) => {
                     {festival.name}
                     {festival.artist}
                     {festival.genres}
+                    {/* {festival.country} */}
                   </Item>
-
-                  {/* <Item id={festival._id}>
-                    Difficulty🏋🏽‍♀️: {festival.difficulty}
-                  </Item> */}
-                  {/* <Item>{festival.image}</Item> */}
-                  {/* <festivalCard
-              name={festival.name}
-              image={festival.image}
-              type={festival.difficulty}
-              id={festival._id}
-            /> */}
                 </Grid>
               ))}
           </Grid>
