@@ -25,8 +25,8 @@ function Search({ value, handleChange }) {
                 border: '4px black solid',
                 borderRadius: '10px',
                 mt: '15px',
-                padding: '5px',
                 maxWidth: '310px',
+                maxHeight: '60px',
               }}
             />
           </div>

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { API } from '../lib/api';
-import { CardMedia } from '@mui/material';
-import Favourite from './common/Favourite';
 
+import { CardMedia } from '@mui/material';
 import {
   Container,
   Box,
@@ -12,6 +10,10 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+
+import { API } from '../lib/api';
+import Favourite from './common/Favourite';
+import FestivalPicture from './common/SingleFestivalPicture';
 
 export default function SingleFestival() {
   const navigate = useNavigate();
@@ -62,16 +64,20 @@ export default function SingleFestival() {
           className='Festival'
         >
           <CardMedia
-            component='img'
-            image={singleFestival?.cover_image}
-            alt={singleFestival?.name}
+            // component='img'
+            // image={singleFestival?.cover_image}
+            // alt={singleFestival?.name}
             sx={{
               maxHeight: 500,
               maxWidth: 1000,
               objectFit: 'contain',
               display: 'block',
             }}
-          />
+          >
+            {singleFestival.cover_image && (
+              <FestivalPicture cover_image={singleFestival.cover_image} />
+            )}
+          </CardMedia>
           <Box className='info'>
             <CardContent>
               <Typography

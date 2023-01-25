@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { styled } from '@mui/material/styles';
-import { Box, Button, Container, Grid, Paper } from '@mui/material';
+import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
 // import '../styles/images.scss';
 import { useNavigate } from 'react-router-dom';
 import FestivalCard from './common/FestivalCard';
 import Search from './common/Search';
 import Favourite from './common/Favourite';
+import FestivalPictureSmall from './common/FestivalPictureSmall';
 
 const AllFestivals = ({ searchedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -63,9 +64,36 @@ const AllFestivals = ({ searchedFestivals }) => {
 
   return (
     <>
-      <Box className='background' sx={{ backgroundColor: 'black', mt: '7vh' }}>
-        <Container className='margins' maxWidth='lg'>
-          <Search value={searchQuery} handleChange={setSearchQuery} />
+      <Box
+        className='background'
+        sx={{
+          backgroundColor: 'black',
+          mt: '7vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Container className='margins'>
+          <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button
+              type='submit'
+              variant='contained'
+              size='small'
+              color='inherit'
+              onClick={handleCreateFestival}
+              sx={{
+                border: '4px black solid',
+                borderRadius: '10px',
+                mt: '15px',
+                maxWidth: '310px',
+                maxHeight: '60px',
+              }}
+            >
+              Create New Festival
+            </Button>
+            <Search value={searchQuery} handleChange={setSearchQuery} />
+          </Container>
           <Grid
             container
             rowSpacing={3}
@@ -78,23 +106,27 @@ const AllFestivals = ({ searchedFestivals }) => {
                     className='hover'
                     onClick={() => handleClick(festival.id)}
                   >
-                    <FestivalCard component='img' image={festival?.cover_image}>
-                      {festival.name}, {festival.country}
-                    </FestivalCard>
-                    <Favourite sx={{ backgroundColor: 'red' }} />
+                    {festival.cover_image && (
+                      <FestivalPictureSmall
+                        cover_image={festival?.cover_image}
+                      ></FestivalPictureSmall>
+                    )}
                   </Item>
+                  <Container
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      margin: 0,
+                    }}
+                  >
+                    <Typography sx={{ color: 'white', mt: '12px' }}>
+                      {festival.name}, {festival.country}
+                    </Typography>
+                    <Favourite sx={{ backgroundColor: 'red' }} />
+                  </Container>
                 </Grid>
               ))}
           </Grid>
-          <Button
-            type='submit'
-            variant='contained'
-            color='inherit'
-            onClick={handleCreateFestival}
-            sx={{ display: 'flex', justifyContent: 'center' }}
-          >
-            Create New Festival
-          </Button>
         </Container>
       </Box>
     </>

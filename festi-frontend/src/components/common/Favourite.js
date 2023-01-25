@@ -13,6 +13,12 @@ export default function Favourite() {
       variant='contained'
       color='inherit'
       onClick={handleClick}
+      sx={{
+        border: '2px black solid',
+        borderRadius: '10px',
+        margin: '5px',
+        minWidth: '100px',
+      }}
     >
       Favourite
     </Button>
