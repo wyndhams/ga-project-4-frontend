@@ -18,8 +18,8 @@ export default function CreateFestival() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
-    genres: '',
-    artist: '',
+    genres: [],
+    artist: 0,
     country: '',
     cost: '',
     month: '',
@@ -64,7 +64,7 @@ export default function CreateFestival() {
         ? formData
         : {
             name: formData.name,
-            genres: formData.genres,
+            genres: [formData.genres],
             artist: formData.artist,
             country: formData.country,
             cost: formData.cost,
@@ -77,7 +77,7 @@ export default function CreateFestival() {
         cover_image: cloudinaryResponse.data.public_id,
       };
 
-      console.log(data);
+      console.log(apiReqBody);
 
       await API.POST(
         API.ENDPOINTS.allFestivals,

@@ -11,7 +11,7 @@ const ENDPOINTS = {
   login: '/api/auth/login/',
   register: '/api/auth/register/',
   search: (query) => `/api/festivals/search?search=${query}`,
-  cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload/`,
 };
 
 const getHeaders = () => ({

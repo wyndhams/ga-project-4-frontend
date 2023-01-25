@@ -6,6 +6,7 @@ import { Button, Container, Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import FestivalCard from './common/FestivalCard';
 import Search from './common/Search';
+import Favourite from './common/Favourite';
 
 const AllFestivals = ({ searchedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -83,10 +84,10 @@ const AllFestivals = ({ searchedFestivals }) => {
                     <FestivalCard
                       component='img'
                       sx={{ height: 20, width: 230 }}
-                      image={festival.cover_image}
+                      image={festival?.cover_image}
                     ></FestivalCard>
-                    {festival.name}
-                    {festival.country}
+                    {festival?.name}, {festival?.country}
+                    <Favourite></Favourite>
                   </Item>
                 </Grid>
               ))}
@@ -96,6 +97,7 @@ const AllFestivals = ({ searchedFestivals }) => {
             variant='contained'
             color='primary'
             onClick={handleCreateFestival}
+            sx={{ display: 'flex', justifyContent: 'center' }}
           >
             Create New Festival
           </Button>

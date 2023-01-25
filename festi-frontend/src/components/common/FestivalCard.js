@@ -8,22 +8,16 @@ import {
   CardActionArea,
 } from '@mui/material';
 
-export default function FestivalCard({
-  name,
-  cover_image,
-  genres,
-  artist,
-  id,
-}) {
+export default function FestivalCard({ name, image, genres, artist, id }) {
   const navigate = useNavigate();
   const navigateToFestival = () => navigate(`/festivals/${id}`);
 
   return (
-    <Card sx={{ maxWidth: 345, height: 450 }}>
+    <Card sx={{ maxWidth: 800, height: 450 }}>
       <CardActionArea onClick={navigateToFestival}>
         <CardMedia
           component='img'
-          image={cover_image}
+          image={image}
           alt={name}
           sx={{ maxHeight: 345, objectFit: 'contain' }}
         />

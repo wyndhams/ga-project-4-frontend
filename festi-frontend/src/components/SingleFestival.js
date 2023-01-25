@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { ImageListItem } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-// import Likes from './common/Likes';
+import Favourite from './common/Favourite';
 
 import {
   Container,
@@ -80,7 +79,7 @@ export default function SingleFestival() {
                 >
                   🔙
                 </Button>
-                <button className='favourite'>Add to Favourites!</button>
+                <Favourite />
 
                 <button className='signUp'>
                   {/* onClick={getAnotherFestival} */}
@@ -88,7 +87,7 @@ export default function SingleFestival() {
                 </button>
               </CardActions>
             </Box>
-            <ImageListItem key={singleFestival?.image}>
+            <ImageListItem key={singleFestival?.cover_image}>
               <img
                 className='singleCard'
                 style={{
@@ -98,7 +97,7 @@ export default function SingleFestival() {
                   // borderRadius: '45%',
                   objectFit: 'cover',
                 }}
-                src={singleFestival?.image}
+                src={singleFestival?.cover_image}
                 alt={singleFestival?.name}
               />
             </ImageListItem>

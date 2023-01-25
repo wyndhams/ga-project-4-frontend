@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import HomeImage from '../assets/home-image.png';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -36,6 +35,27 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     width: 200,
+  },
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url(${'https://res.cloudinary.com/dep5f7nys/image/upload/v1674583429/Festi/home-image_kilogl.png'})`,
+    backgroundSize: 'cover',
+    zIndex: -1,
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      filter: 'blur(5px) brightness(80%)',
+      zIndex: -1,
+    },
   },
 }));
 
@@ -92,15 +112,16 @@ const Home = () => {
 
   return (
     <>
+      <div className={classes.image}></div>
       <Typography
         align='center'
         component='div'
         variant='header'
-        color='primary'
         style={{
           width: '100%',
           position: 'relative',
           marginTop: '15vh',
+          color: 'white',
         }}
         fontWeight='fontWeightMedium'
         fontSize={50}
@@ -111,11 +132,11 @@ const Home = () => {
         align='center'
         component='div'
         variant='header'
-        color='primary'
         style={{
           width: '100%',
           position: 'relative',
           margin: '4vh',
+          color: 'white',
         }}
         fontSize={20}
       >
@@ -135,6 +156,13 @@ const Home = () => {
                 name='genres'
                 value={filters.genres}
                 onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -156,6 +184,13 @@ const Home = () => {
                 name='artists'
                 value={filters.artists}
                 onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -176,6 +211,13 @@ const Home = () => {
                 name='country'
                 value={filters.country}
                 onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -198,6 +240,13 @@ const Home = () => {
                 name='cost'
                 value={filters.cost}
                 onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -215,6 +264,13 @@ const Home = () => {
                 name='month'
                 value={filters.month}
                 onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -233,17 +289,40 @@ const Home = () => {
                 <MenuItem value='December'>December</MenuItem>
               </Select>
             </FormControl>
-            <TextField
-              className={classes.textField}
-              label='Capacity'
-              id='capacity'
-              name='capacity'
-              value={filters.capacity}
-              onChange={handleChange}
-            />
+            <FormControl className={classes.formControl}>
+              <InputLabel id='capacity-label'>Capacity</InputLabel>
+              <Select
+                labelId='capacity-label'
+                id='capacity'
+                name='capacity'
+                value={filters.capacity}
+                onChange={handleChange}
+                sx={{
+                  backgroundColor: 'white',
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '5px',
+                  minWidth: '100px',
+                }}
+              >
+                <MenuItem value=''>
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value='expensive'>Expensive</MenuItem>
+                <MenuItem value='medium'>Medium</MenuItem>
+                <MenuItem value='cheap'>Cheap</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
+        </Grid>
+        <Grid container className={classes.root}>
           <Grid item xs={2}>
-            <Button type='submit' variant='contained' color='primary'>
+            <Button
+              type='submit'
+              variant='contained'
+              color='inherit'
+              sx={{ margin: '5px' }}
+            >
               Search
             </Button>
             <Link
@@ -252,8 +331,9 @@ const Home = () => {
             >
               <Button
                 className='homeButton'
-                color='primary'
+                color='inherit'
                 variant='contained'
+                sx={{ margin: '5px' }}
               >
                 ALL FESTIVALS
               </Button>
@@ -262,13 +342,6 @@ const Home = () => {
         </Grid>
       </form>
       {/* END OF FILTER FORM */}
-      <Grid item xs={1} className={classes.middleRow}>
-        <img
-          src={HomeImage}
-          alt='Graphic of people dancing around a drum'
-          style={{ maxWidth: '100%', maxHeight: '60vh' }}
-        />
-      </Grid>
     </>
   );
 };
