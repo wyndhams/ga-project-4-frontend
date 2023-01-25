@@ -1,4 +1,6 @@
-// import '../../styles/images.scss';
+import '../../styles/search.css';
+
+import { TextField } from '@mui/material';
 
 function Search({ value, handleChange }) {
   const handleInputChange = (e) => handleChange(e.target.value);
@@ -12,12 +14,20 @@ function Search({ value, handleChange }) {
       <div className='container'>
         <div className='field has-addons'>
           <div className='control is-expanded'>
-            <input
+            <TextField
               type='search'
               className='searchInput'
-              placeholder='SEARCH FOR YOUR FESTIVAL🔎'
+              placeholder='SEARCH... 🔎'
               value={value}
               onChange={handleInputChange}
+              sx={{
+                backgroundColor: 'white',
+                border: '4px black solid',
+                borderRadius: '10px',
+                mt: '15px',
+                padding: '5px',
+                maxWidth: '310px',
+              }}
             />
           </div>
           <div className='control'>

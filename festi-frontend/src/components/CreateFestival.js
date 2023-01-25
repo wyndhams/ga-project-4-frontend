@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Grid,
+  Typography,
   // FormControl,
   // InputLabel,
   // Select,
@@ -13,9 +14,40 @@ import {
 } from '@mui/material';
 import { API } from '../lib/api';
 import { NOTIFY } from '../lib/notifications';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundImage: `url(${'https://res.cloudinary.com/dep5f7nys/image/upload/v1674656584/Festi/festi-img3_rlueb8.png'})`,
+    backgroundSize: 'cover',
+    zIndex: -1,
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      filter: 'blur(5px) brightness(80%)',
+      zIndex: -1,
+    },
+  },
+  textField: {
+    backgroundColor: 'white',
+    border: '2px black solid',
+    borderRadius: '10px',
+  },
+}));
 
 export default function CreateFestival() {
   const navigate = useNavigate();
+  const classes = useStyles();
   const [formData, setFormData] = useState({
     name: '',
     genres: [],
@@ -37,7 +69,14 @@ export default function CreateFestival() {
   }, []);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'genres') {
+      setFormData({
+        ...formData,
+        genres: [...formData.genres, parseInt(e.target.value)],
+      });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   const handleFileChange = (e) => {
@@ -59,18 +98,6 @@ export default function CreateFestival() {
         API.ENDPOINTS.cloudinary,
         imageData
       );
-
-      const data = formData.festivals
-        ? formData
-        : {
-            name: formData.name,
-            genres: [formData.genres],
-            artist: formData.artist,
-            country: formData.country,
-            cost: formData.cost,
-            month: formData.month,
-            capacity: formData.capacity,
-          };
 
       const apiReqBody = {
         ...formData,
@@ -97,17 +124,34 @@ export default function CreateFestival() {
 
   return (
     <>
+      <div className={classes.image} />
       <h1>Create Festival</h1>
       {/* <img src={HomeImage} alt='Festival Image' /> */}
 
       <Container
-        maxWidth='lg'
+        maxWidth='sm'
         sx={{ display: 'flex', justifyContent: 'center', pt: 3 }}
       >
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
+            <Typography
+              align='center'
+              component='div'
+              variant='header'
+              style={{
+                width: '100%',
+                position: 'relative',
+                marginTop: '5vh',
+                color: 'white',
+              }}
+              fontWeight='fontWeightMedium'
+              fontSize={50}
+            >
+              Create A New Festival
+            </Typography>
             <Grid item xs={12}>
               <TextField
+                className={classes.textField}
                 required
                 fullWidth
                 type='text'
@@ -116,11 +160,13 @@ export default function CreateFestival() {
                 error={error}
                 label='Name'
                 name='name'
+                sx={{ mt: '40px' }}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
+                className={classes.textField}
                 required
                 fullWidth
                 type='text'
@@ -134,7 +180,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 name='artist'
@@ -149,7 +195,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 id='country'
@@ -164,7 +210,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 id='cost'
@@ -179,7 +225,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 id='month'
@@ -194,7 +240,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 name='capacity'
@@ -209,7 +255,7 @@ export default function CreateFestival() {
 
             <Grid item xs={12}>
               <TextField
-                className='textfield'
+                className={classes.textField}
                 required
                 fullWidth
                 name='cover_image'
@@ -221,7 +267,7 @@ export default function CreateFestival() {
           </Grid>
 
           <Button
-            sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
+            sx={{ mt: 2, display: 'flex', justifyContent: '' }}
             type='submit'
             variant='contained'
             color='primary'

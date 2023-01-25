@@ -72,14 +72,14 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            // backgroundImage: 'url(https://i.postimg.cc/prYb3y3S/login.png)',
+            backgroundImage:
+              'url(https://res.cloudinary.com/dep5f7nys/image/upload/v1674660452/Festi/festi-img5_tcwque.png)',
             backgroundRepeat: 'no-repeat',
-            // backgroundColor: (t) =>
-            //   t.palette.mode === 'light'
-            //     ? t.palette.grey[50]
-            //     : t.palette.grey[900],
-            backgroundSize: 'cover',
             backgroundPosition: 'center',
+            top: 0,
+            left: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            filter: 'blur(0.5px) brightness(50%)',
           }}
         />
 
@@ -97,15 +97,12 @@ const Login = () => {
               Log in
             </Typography> */}
             <Box
-              component='img'
               sx={{
                 mt: 20,
                 mb: 4,
                 height: 100,
                 width: 400,
               }}
-              alt='Login text'
-              // src={LoginText}
             />
             <Box
               component='form'

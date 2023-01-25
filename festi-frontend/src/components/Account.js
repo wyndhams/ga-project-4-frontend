@@ -21,6 +21,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  ImageListItem,
 } from '@mui/material';
 
 const commonStyles = {
@@ -36,31 +37,35 @@ function createData(height, weight, bmi) {
 }
 const rows = [createData(181, 106, 32)];
 
-// const photoReel = [{}];
+const photoReel = [
+  {
+    image:
+      'https://res.cloudinary.com/dep5f7nys/image/upload/v1674583429/Festi/home-image_kilogl.png',
+    title: 'Festi-Graphic-1',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/dep5f7nys/image/upload/v1674648157/Festi/cover_eppw91.png',
+    title: 'Festi-Graphic-1',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/dep5f7nys/image/upload/v1674648553/Festi/festi-img2_yfssgh.png',
+    title: 'Festi-Graphic-1',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/dep5f7nys/image/upload/v1674583429/Festi/home-image_kilogl.png',
+    title: 'Festi-Graphic-1',
+  },
+];
 
 const Account = () => (
   <>
     <Box sx={{ backgroundColor: 'black' }}>
       <Box
-        component='img'
         sx={{
-          position: 'absolute',
-          top: '8vh',
-          justify: 'center',
-          left: '40%',
-          // zIndex: 'tooltip',
-          mt: 4,
-          mb: 20,
-          height: 100,
-          width: 400,
-        }}
-        alt='Account page text'
-        // src={AccountText}
-      />
-
-      <Box
-        sx={{
-          // backgroundColor: 'pink',
+          backgroundColor: 'black',
           position: 'absolute',
           top: '23vh',
           justify: 'center',
@@ -79,16 +84,16 @@ const Account = () => (
               cols={4}
               rowHeight={164}
             >
-              {/* {photoReel.map((item) => (
+              {photoReel.map((item) => (
                 <ImageListItem key={item.img}>
                   <img
-                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    src={`${item.image}?w=164&h=164&fit=crop&auto=format`}
+                    srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.title}
                     loading='lazy'
                   />
                 </ImageListItem>
-              ))} */}
+              ))}
             </ImageList>
           </Stack>
         </Box>
@@ -151,7 +156,7 @@ const Account = () => (
         }}
       >
         <Grid>
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} sx={{ mt: '5vh' }}>
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>

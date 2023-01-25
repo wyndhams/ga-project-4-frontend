@@ -13,7 +13,7 @@ export default function FestivalCard({ name, image, genres, artist, id }) {
   const navigateToFestival = () => navigate(`/festivals/${id}`);
 
   return (
-    <Card sx={{ maxWidth: 800, height: 450 }}>
+    <Card sx={{ maxWidth: 800, height: 350, backgroundColor: 'black' }}>
       <CardActionArea onClick={navigateToFestival}>
         <CardMedia
           component='img'

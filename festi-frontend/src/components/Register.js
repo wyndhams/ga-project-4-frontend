@@ -15,10 +15,41 @@ import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
 import { NOTIFY } from '../lib/notifications';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
 // import '../styles/RegisterStyling.scss';
+
+const useStyles = makeStyles((theme) => ({
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundImage: `url(${'https://res.cloudinary.com/dep5f7nys/image/upload/v1674648553/Festi/festi-img2_yfssgh.png'})`,
+    backgroundSize: 'cover',
+    zIndex: -1,
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      filter: 'blur(5px) brightness(80%)',
+      zIndex: -1,
+    },
+  },
+  textField: {
+    backgroundColor: 'white',
+    border: '2px black solid',
+    borderRadius: '10px',
+  },
+}));
 
 export default function Register() {
   const navigate = useNavigate();
+  const classes = useStyles();
   const [formFields, setFormFields] = useState({
     first_name: '',
     last_name: '',
@@ -83,13 +114,13 @@ export default function Register() {
 
   return (
     <>
-      <img className='form' alt='festival' />
-      <Container component='main' maxWidth='xs'>
+      <div className={classes.image}></div>
+      <Container component='main' maxWidth='sm'>
         <CssBaseline />
         <form onSubmit={handleCreateUser}>
           <Box
             sx={{
-              marginTop: 20,
+              mt: 20,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -98,13 +129,18 @@ export default function Register() {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component='h1' variant='h5' className='text'>
+            <Typography
+              component='h1'
+              variant='h5'
+              className='text'
+              sx={{ color: 'white', mb: '20px', fontSize: '32px' }}
+            >
               Register{' '}
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   autoComplete='given-name'
                   name='first_name'
                   required
@@ -121,7 +157,7 @@ export default function Register() {
 
               <Grid item xs={12} sm={6}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   id='last_name'
@@ -137,7 +173,7 @@ export default function Register() {
 
               <Grid item xs={12}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   id='username'
@@ -152,7 +188,7 @@ export default function Register() {
 
               <Grid item xs={12}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   id='email'
@@ -168,7 +204,7 @@ export default function Register() {
 
               <Grid item xs={12}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   name='password'
@@ -184,7 +220,7 @@ export default function Register() {
 
               <Grid item xs={12}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   name='password_confirmation'
@@ -199,7 +235,7 @@ export default function Register() {
 
               <Grid item xs={12}>
                 <TextField
-                  className='textfield'
+                  className={classes.textField}
                   required
                   fullWidth
                   name='profile_image'
@@ -213,17 +249,23 @@ export default function Register() {
                 <FormControlLabel
                   className='text'
                   control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
+                    <Checkbox
+                      value='allowExtraEmails'
+                      color='secondary'
+                      label='My checkbox'
+                    />
                   }
                   label='I want to get updates about new festivals!'
+                  sx={{ color: 'white' }}
                 />
               </Grid>
             </Grid>
             <Button
               type='submit'
+              color='inherit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 1, mb: 2 }}
             >
               Register
             </Button>
@@ -234,6 +276,7 @@ export default function Register() {
                   href='#'
                   variant='body2'
                   onClick={handleAlreadyRegistered}
+                  sx={{ color: 'white' }}
                 >
                   Already have an account? Sign in
                 </Link>

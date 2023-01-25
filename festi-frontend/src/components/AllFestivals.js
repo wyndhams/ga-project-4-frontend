@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { styled } from '@mui/material/styles';
-import { Button, Container, Grid, Paper } from '@mui/material';
+import { Box, Button, Container, Grid, Paper } from '@mui/material';
 // import '../styles/images.scss';
 import { useNavigate } from 'react-router-dom';
 import FestivalCard from './common/FestivalCard';
@@ -10,7 +10,6 @@ import Favourite from './common/Favourite';
 
 const AllFestivals = ({ searchedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
@@ -64,15 +63,13 @@ const AllFestivals = ({ searchedFestivals }) => {
 
   return (
     <>
-      <div className='background'>
-        <Search value={searchQuery} handleChange={setSearchQuery} />
+      <Box className='background' sx={{ backgroundColor: 'black', mt: '7vh' }}>
         <Container className='margins' maxWidth='lg'>
+          <Search value={searchQuery} handleChange={setSearchQuery} />
           <Grid
             container
-            rowSpacing={1}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            justifyContent='center'
-            alignItems='center'
           >
             {festivals &&
               filterFestivals().map((festival) => (
@@ -85,8 +82,9 @@ const AllFestivals = ({ searchedFestivals }) => {
                       component='img'
                       sx={{ height: 20, width: 230 }}
                       image={festival?.cover_image}
-                    ></FestivalCard>
-                    {festival?.name}, {festival?.country}
+                    >
+                      {festival.name}, {festival.country}
+                    </FestivalCard>
                     <Favourite></Favourite>
                   </Item>
                 </Grid>
@@ -102,7 +100,7 @@ const AllFestivals = ({ searchedFestivals }) => {
             Create New Festival
           </Button>
         </Container>
-      </div>
+      </Box>
     </>
   );
 };
