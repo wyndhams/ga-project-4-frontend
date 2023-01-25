@@ -1,24 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthenticated } from '../hooks/useAuthenticated';
-import { AUTH } from '../lib/auth';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
-// import Switch from '@mui/material/Switch';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormGroup from '@mui/material/FormGroup';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { NOTIFY } from '../lib/notifications';
+import { AUTH } from '../lib/auth';
 import Logo from '../assets/logo.png';
-import { stepClasses } from '@mui/material';
 
 const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
-  // const [auth, setAuth] = React.useState(true);
+  // const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useAuthenticated();
@@ -26,6 +22,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
   const logout = () => {
     AUTH.logout();
     setIsLoggedIn(false);
+    NOTIFY.SUCCESS('Successfully Logged Out');
     navigate('/');
   };
 

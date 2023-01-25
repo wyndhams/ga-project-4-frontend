@@ -42,7 +42,7 @@ const Login = () => {
       .then(({ data }) => {
         NOTIFY.SUCCESS('You are now logged in!');
         AUTH.setToken(data.token);
-        navigate('/festivals/');
+        navigate('/');
       })
       .catch((e) => {
         console.log(e);

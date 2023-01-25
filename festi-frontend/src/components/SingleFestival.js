@@ -14,9 +14,12 @@ import {
 import { API } from '../lib/api';
 import Favourite from './common/Favourite';
 import FestivalPicture from './common/SingleFestivalPicture';
+import { NOTIFY } from '../lib/notifications';
+import { useAuthenticated } from '../hooks/useAuthenticated';
 
 export default function SingleFestival() {
   const navigate = useNavigate();
+  const [isLoggedIn] = useAuthenticated();
   const { id } = useParams();
   const [singleFestival, setSingleFestival] = useState(['']);
   const [newFestivals, setNewFestivals] = useState(['']);
@@ -50,6 +53,17 @@ export default function SingleFestival() {
       .catch(({ message, response }) => {
         console.error(message, response);
       });
+  };
+
+  const deleteFestival = (e) => {
+    e.preventDefault();
+    API.DELETE(API.ENDPOINTS.singleFestival(id), API.getHeaders())
+      .then(() => {
+        NOTIFY.SUCCESS('Successfully Deleted!');
+        setIsUpdated(true);
+        navigate('/festivals');
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -120,7 +134,6 @@ export default function SingleFestival() {
               >
                 Back
               </Button>
-              <Favourite />
               <Button
                 className='Button'
                 type='submit'
@@ -131,6 +144,21 @@ export default function SingleFestival() {
               >
                 Get Another Festival!{' '}
               </Button>
+              {isLoggedIn && (
+                <>
+                  <Favourite />
+                  <Button
+                    className='Button'
+                    type='submit'
+                    variant='contained'
+                    color='inherit'
+                    sx={{ margin: '5px' }}
+                    onClick={deleteFestival}
+                  >
+                    Delete Festival
+                  </Button>
+                </>
+              )}
             </CardActions>
           </Box>
         </Container>

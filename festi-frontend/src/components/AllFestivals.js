@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { API } from '../lib/api';
+import { useNavigate } from 'react-router-dom';
+
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
-// import '../styles/images.scss';
-import { useNavigate } from 'react-router-dom';
-import FestivalCard from './common/FestivalCard';
+
+import { API } from '../lib/api';
+import { useAuthenticated } from '../hooks/useAuthenticated';
+// import { AUTH } from '../lib/auth';
 import Search from './common/Search';
-import Favourite from './common/Favourite';
 import FestivalPictureSmall from './common/FestivalPictureSmall';
 
-const AllFestivals = ({ searchedFestivals }) => {
+const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -17,16 +18,10 @@ const AllFestivals = ({ searchedFestivals }) => {
     color: theme.palette.text.secondary,
   }));
 
-  // const [isHover, setIsHover] = useState(false);
-
-  // const handleMouseEnter = () => {
-  //   setIsHover(true);
-  // };
-  // const handleMouseLeave = () => {
-  //   setIsHover(false);
-  // };
+  const [isLoggedIn] = useAuthenticated();
 
   const [festivals, setFestivals] = useState(null);
+  const [favourites, setFavourites] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filterFestivals = () => {
@@ -62,6 +57,16 @@ const AllFestivals = ({ searchedFestivals }) => {
 
   const handleCreateFestival = (e) => navigate('/festivals/create');
 
+  const handleFavourite = (festival) => {
+    // if (!favourites.includes(festival)) {
+    //   setFavourites([...favourites, festival]);
+    // } else {
+    //   setFavourites([...favourites.filter((item) => item !== festival)]);
+    // }
+    // setFavourites(...favourites, festival);
+    console.log(festival);
+  };
+
   return (
     <>
       <Box
@@ -76,22 +81,28 @@ const AllFestivals = ({ searchedFestivals }) => {
       >
         <Container className='margins'>
           <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button
-              type='submit'
-              variant='contained'
-              size='small'
-              color='inherit'
-              onClick={handleCreateFestival}
-              sx={{
-                border: '4px black solid',
-                borderRadius: '10px',
-                mt: '15px',
-                maxWidth: '310px',
-                maxHeight: '60px',
-              }}
-            >
-              Create New Festival
-            </Button>
+            {isLoggedIn && (
+              <Button
+                type='submit'
+                variant='contained'
+                size='small'
+                color='inherit'
+                onClick={handleCreateFestival}
+                sx={{
+                  border: '4px black solid',
+                  borderRadius: '10px',
+                  mt: '15px',
+                  maxWidth: '310px',
+                  maxHeight: '60px',
+                  '&:hover': {
+                    background: '#f00',
+                    color: 'white',
+                  },
+                }}
+              >
+                Create New Festival
+              </Button>
+            )}
             <Search value={searchQuery} handleChange={setSearchQuery} />
           </Container>
           <Grid
@@ -105,6 +116,12 @@ const AllFestivals = ({ searchedFestivals }) => {
                   <Item
                     className='hover'
                     onClick={() => handleClick(festival.id)}
+                    sx={{
+                      '&:hover': {
+                        background: '#f00',
+                        cursor: 'pointer',
+                      },
+                    }}
                   >
                     {festival.cover_image && (
                       <FestivalPictureSmall
@@ -122,7 +139,30 @@ const AllFestivals = ({ searchedFestivals }) => {
                     <Typography sx={{ color: 'white', mt: '12px' }}>
                       {festival.name}, {festival.country}
                     </Typography>
-                    <Favourite sx={{ backgroundColor: 'red' }} />
+                    {isLoggedIn && (
+                      <div key={festival.id}>
+                        <Button
+                          key={festival.id}
+                          className='Button'
+                          type='submit'
+                          variant='contained'
+                          color='inherit'
+                          sx={{
+                            border: '2px black solid',
+                            borderRadius: '10px',
+                            margin: '5px',
+                            minWidth: '100px',
+                            '&:hover': {
+                              background: '#f00',
+                              color: 'white',
+                            },
+                          }}
+                          onClick={() => handleFavourite(festival)}
+                        >
+                          Favourite
+                        </Button>
+                      </div>
+                    )}
                   </Container>
                 </Grid>
               ))}

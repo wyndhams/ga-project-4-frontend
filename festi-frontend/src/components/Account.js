@@ -31,12 +31,6 @@ const commonStyles = {
   height: '12.5rem',
 };
 
-// get height and weight from API
-function createData(height, weight, bmi) {
-  return { height, weight, bmi };
-}
-const rows = [createData(181, 106, 32)];
-
 const photoReel = [
   {
     image:
@@ -60,14 +54,14 @@ const photoReel = [
   },
 ];
 
-const Account = () => (
+const Account = ({ favourites }) => (
   <>
     <Box sx={{ backgroundColor: 'black' }}>
       <Box
         sx={{
           backgroundColor: 'black',
           position: 'absolute',
-          top: '23vh',
+          top: '12vh',
           justify: 'center',
           left: '15%',
           // zIndex: 'tooltip',
@@ -92,6 +86,7 @@ const Account = () => (
                     alt={item.title}
                     loading='lazy'
                   />
+                  <div>{favourites}</div>
                 </ImageListItem>
               ))}
             </ImageList>
@@ -102,9 +97,9 @@ const Account = () => (
       <Box
         sx={{
           position: 'absolute',
-          top: '47vh',
+          top: '30vh',
           justify: 'center',
-          left: '15%',
+          left: '18%',
           // zIndex: 'tooltip',
         }}
       >
@@ -156,12 +151,18 @@ const Account = () => (
         }}
       >
         <Grid>
-          <TableContainer component={Paper} sx={{ mt: '5vh' }}>
+          <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label='simple table'>
               <TableHead>
                 <TableRow>
                   <TableCell align='left'>Username</TableCell>
                   <TableCell align='left'>Email</TableCell>
+                  <TableCell align='left'>Password</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell align='left'>admin</TableCell>
+                  <TableCell align='left'>admin@admin.com</TableCell>
+                  <TableCell align='left'>*****</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

@@ -26,7 +26,7 @@ function Search({ value, handleChange }) {
                 borderRadius: '10px',
                 mt: '15px',
                 maxWidth: '310px',
-                maxHeight: '60px',
+                maxHeight: '50px',
               }}
             />
           </div>
