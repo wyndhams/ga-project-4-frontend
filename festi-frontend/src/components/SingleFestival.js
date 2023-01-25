@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
-import { ImageListItem } from '@mui/material';
+import { CardMedia } from '@mui/material';
 import Favourite from './common/Favourite';
 
 import {
@@ -17,6 +17,7 @@ export default function SingleFestival() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [singleFestival, setSingleFestival] = useState(['']);
+  const [newFestivals, setNewFestivals] = useState(['']);
   const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
@@ -33,6 +34,22 @@ export default function SingleFestival() {
 
   const goToAllFestivals = () => navigate('/festivals');
 
+  const getRandomFestival = (e) => {
+    e.preventDefault();
+    API.GET(API.ENDPOINTS.allFestivals)
+      .then(({ data }) => {
+        setNewFestivals(data);
+        var randomInteger = Math.ceil(Math.random() * data.length - 1);
+        if (randomInteger === 0) {
+          randomInteger = 1;
+        }
+        navigate(`/festivals/${randomInteger}`);
+      })
+      .catch(({ message, response }) => {
+        console.error(message, response);
+      });
+  };
+
   return (
     <>
       <Box
@@ -40,10 +57,21 @@ export default function SingleFestival() {
         sx={{ backgroundColor: 'black', height: '100vh' }}
       >
         <Container
-          maxWidth='400px'
+          maxWidth='800px'
           sx={{ display: 'flex', pt: 15 }}
           className='Festival'
         >
+          <CardMedia
+            component='img'
+            image={singleFestival?.cover_image}
+            alt={singleFestival?.name}
+            sx={{
+              maxHeight: 500,
+              maxWidth: 1000,
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
           <Box className='info'>
             <CardContent>
               <Typography
@@ -56,42 +84,49 @@ export default function SingleFestival() {
               </Typography>
 
               <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
-                Country: {singleFestival.country}
+                Country: {singleFestival?.country}
+              </Typography>
+
+              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+                Month: {singleFestival?.month}
+              </Typography>
+
+              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+                Capacity: {singleFestival?.capacity}
+              </Typography>
+
+              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+                Cost: {singleFestival?.cost}
               </Typography>
 
               {/* <Typography color='text.primary'>
-              {singleFestival.muscleGroup.name}
-            </Typography> */}
+                    {singleFestival.muscleGroup.name}
+                  </Typography> */}
             </CardContent>
             <CardActions>
               <Button
                 className='Button'
-                size='small'
+                type='submit'
+                variant='contained'
+                color='inherit'
+                sx={{ margin: '5px' }}
                 onClick={goToAllFestivals}
               >
-                🔙
+                Back
               </Button>
               <Favourite />
-
-              <button className='signUp'>
-                {/* onClick={getAnotherFestival} */}
+              <Button
+                className='Button'
+                type='submit'
+                variant='contained'
+                color='inherit'
+                sx={{ margin: '5px' }}
+                onClick={getRandomFestival}
+              >
                 Get Another Festival!{' '}
-              </button>
+              </Button>
             </CardActions>
           </Box>
-          <ImageListItem key={singleFestival?.cover_image}>
-            <img
-              className='singleCard'
-              style={{
-                width: '50vw',
-                height: '50vh',
-                padding: 50,
-                objectFit: 'cover',
-              }}
-              src={singleFestival?.cover_image}
-              alt={singleFestival?.name}
-            />
-          </ImageListItem>
         </Container>
       </Box>
     </>

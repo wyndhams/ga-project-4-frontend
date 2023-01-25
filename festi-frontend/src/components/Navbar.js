@@ -11,9 +11,11 @@ import IconButton from '@mui/material/IconButton';
 // import Switch from '@mui/material/Switch';
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import FormGroup from '@mui/material/FormGroup';
+import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Logo from '../assets/logo.png';
+import { stepClasses } from '@mui/material';
 
 const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
   // const [auth, setAuth] = React.useState(true);
@@ -62,13 +64,15 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
           {/* start of burger */}
           <div>
             <IconButton
-              size='large'
+              size='xl'
               aria-label='account of current user'
               aria-controls='menu-appbar'
               aria-haspopup='true'
               onClick={handleMenu}
-              color='primary'
-            ></IconButton>
+              color='inherit'
+            >
+              <MenuIcon sx={{ scale: 2 }} />
+            </IconButton>
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -93,7 +97,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
                     variant='h6'
                     color='inherit'
                     component='div'
-                    sx={{ mr: 2 }}
+                    sx={{ mr: 2, color: 'black' }}
                   >
                     Home
                   </Typography>
@@ -108,7 +112,7 @@ const Navbar = ({ setSearchedFestivals, SearchedFestivals }) => {
                     variant='h6'
                     color='inherit'
                     component='div'
-                    sx={{ mr: 2 }}
+                    sx={{ mr: 2, color: 'black' }}
                   >
                     Festivals
                   </Typography>

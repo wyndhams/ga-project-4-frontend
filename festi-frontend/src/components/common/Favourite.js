@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 
 export default function Favourite() {
@@ -6,10 +7,14 @@ export default function Favourite() {
   const handleClick = () => setFavourite(!favourite);
 
   return (
-    <button onClick={handleClick}>
-      <div className='favourite'>
-        <span>Favourite</span>
-      </div>
-    </button>
+    <Button
+      className='Button'
+      type='submit'
+      variant='contained'
+      color='inherit'
+      onClick={handleClick}
+    >
+      Favourite
+    </Button>
   );
 }

@@ -78,14 +78,10 @@ const AllFestivals = ({ searchedFestivals }) => {
                     className='hover'
                     onClick={() => handleClick(festival.id)}
                   >
-                    <FestivalCard
-                      component='img'
-                      sx={{ height: 20, width: 230 }}
-                      image={festival?.cover_image}
-                    >
+                    <FestivalCard component='img' image={festival?.cover_image}>
                       {festival.name}, {festival.country}
                     </FestivalCard>
-                    <Favourite></Favourite>
+                    <Favourite sx={{ backgroundColor: 'red' }} />
                   </Item>
                 </Grid>
               ))}
@@ -93,7 +89,7 @@ const AllFestivals = ({ searchedFestivals }) => {
           <Button
             type='submit'
             variant='contained'
-            color='primary'
+            color='inherit'
             onClick={handleCreateFestival}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
