@@ -267,10 +267,11 @@ export default function CreateFestival() {
           </Grid>
 
           <Button
-            sx={{ mt: 2, display: 'flex', justifyContent: '' }}
             type='submit'
+            color='inherit'
+            fullWidth
             variant='contained'
-            color='primary'
+            sx={{ mt: 2 }}
           >
             Create New Festival
           </Button>

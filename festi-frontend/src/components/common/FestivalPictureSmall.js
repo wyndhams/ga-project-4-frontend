@@ -3,9 +3,6 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
 
 import { thumbnail } from '@cloudinary/url-gen/actions/resize';
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import { focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
-import { FocusOn } from '@cloudinary/url-gen/qualifiers/focusOn';
 
 export default function FestivalPictureSmall({ cover_image }) {
   const cld = new Cloudinary({
@@ -16,7 +13,7 @@ export default function FestivalPictureSmall({ cover_image }) {
 
   const myImage = cld.image(cover_image);
 
-  myImage.resize(thumbnail().width(550).height(400));
+  myImage.resize(thumbnail().width(540).height(480));
 
   return (
     <>
