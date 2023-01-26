@@ -95,7 +95,7 @@ export default function SingleFestival() {
               <FestivalPicture cover_image={singleFestival.cover_image} />
             )}
           </CardMedia>
-          <Box className='info' sx={{ marginLeft: '5vw', minWidth: '40vw' }}>
+          <Box className='info' sx={{ marginLeft: '5vw', width: '40vw' }}>
             <CardContent>
               <Typography
                 className='font-link-title'

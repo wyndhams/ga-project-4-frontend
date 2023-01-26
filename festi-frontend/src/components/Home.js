@@ -40,6 +40,14 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     width: 200,
   },
+  InputLabel: {
+    backgroundColor: 'white',
+    border: '2px black solid',
+    borderRadius: '10px',
+    margin: '5px',
+    minWidth: '100px',
+    maxHeight: '50px',
+  },
   image: {
     position: 'absolute',
     top: 0,
@@ -56,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      filter: 'blur(5px) brightness(80%)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+      filter: 'blur(5px) brightness(40%)',
       zIndex: -1,
     },
   },
@@ -158,7 +166,7 @@ const Home = () => {
         style={{
           width: '100%',
           position: 'relative',
-          marginTop: '15vh',
+          marginTop: '12vh',
           color: 'white',
         }}
         fontWeight='fontWeightMedium'
@@ -217,7 +225,7 @@ const Home = () => {
                 <MenuItem value='artist6'>Artist 6</MenuItem>
               </Select>
             </FormControl> */}
-            <FormControl className={classes.formControl}>
+            <FormControl>
               <InputLabel id='country-label'>Country</InputLabel>
               <Select
                 labelId='country-label'
@@ -230,7 +238,8 @@ const Home = () => {
                   border: '2px black solid',
                   borderRadius: '10px',
                   margin: '5px',
-                  minWidth: '100px',
+                  minWidth: '150px',
+                  maxHeight: '50px',
                 }}
               >
                 <MenuItem value=''>
@@ -272,7 +281,8 @@ const Home = () => {
                   border: '2px black solid',
                   borderRadius: '10px',
                   margin: '5px',
-                  minWidth: '100px',
+                  minWidth: '150px',
+                  maxHeight: '50px',
                 }}
               >
                 <MenuItem value=''>
@@ -296,7 +306,8 @@ const Home = () => {
                   border: '2px black solid',
                   borderRadius: '10px',
                   margin: '5px',
-                  minWidth: '100px',
+                  minWidth: '150px',
+                  maxHeight: '50px',
                 }}
               >
                 <MenuItem value=''>
@@ -329,7 +340,8 @@ const Home = () => {
                   border: '2px black solid',
                   borderRadius: '10px',
                   margin: '5px',
-                  minWidth: '100px',
+                  minWidth: '150px',
+                  maxHeight: '50px',
                 }}
               >
                 <MenuItem value=''>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { API } from '../lib/api';
 import { useAuthenticated } from '../hooks/useAuthenticated';
@@ -13,6 +14,17 @@ import FestivalPictureSmall from './common/FestivalPictureSmall';
 import '../App.css';
 import '../styles/button.css';
 
+const useStyles = makeStyles(() => ({
+  selected: {
+    backgroundColor: '#f00',
+    color: 'white',
+  },
+  notSelected: {
+    backgroundColor: 'white',
+    color: 'black',
+  },
+}));
+
 const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -22,10 +34,11 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
   }));
 
   const [isLoggedIn] = useAuthenticated();
-
   const [festivals, setFestivals] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selected, setSelected] = useState([]);
+  const classes = useStyles();
 
   const filterFestivals = () => {
     const regex = new RegExp(searchQuery, 'i');
@@ -60,14 +73,15 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
 
   const handleCreateFestival = (e) => navigate('/festivals/create');
 
-  const handleFavourite = (e) => {
-    // if (!favourites.includes(festival)) {
-    //   setFavourites([...favourites, festival]);
-    // } else {
-    //   setFavourites([...favourites.filter((item) => item !== festival)]);
-    // }
-    // setFavourites(...favourites, festival);
-    console.log(e);
+  const handleFavourite = (id) => {
+    if (selected.includes(id)) {
+      const newSelection = selected.filter((festivalId) => festivalId !== id);
+      setSelected(newSelection);
+      console.log(selected);
+    } else {
+      setSelected([...selected, id]);
+      console.log(selected);
+    }
   };
 
   return (
@@ -76,7 +90,7 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
         className='background'
         sx={{
           backgroundColor: 'black',
-          mt: '7vh',
+          mt: '8vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -117,6 +131,11 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
               filterFestivals().map((festival) => (
                 <Grid item xs={6} key={festival.id}>
                   <Item
+                    className={
+                      selected.includes(festival.id)
+                        ? classes.selected
+                        : classes.notSelected
+                    }
                     onClick={() => handleClick(festival.id)}
                     sx={{
                       '&:hover': {
