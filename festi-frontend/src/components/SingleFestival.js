@@ -17,6 +17,9 @@ import FestivalPicture from './common/SingleFestivalPicture';
 import { NOTIFY } from '../lib/notifications';
 import { useAuthenticated } from '../hooks/useAuthenticated';
 
+import '../styles/button.css';
+import '../App.css';
+
 export default function SingleFestival() {
   const navigate = useNavigate();
   const [isLoggedIn] = useAuthenticated();
@@ -74,7 +77,7 @@ export default function SingleFestival() {
       >
         <Container
           maxWidth='800px'
-          sx={{ display: 'flex', pt: 15 }}
+          sx={{ display: 'flex', pt: 15, marginLeft: '8vw', mt: '5vh' }}
           className='Festival'
         >
           <CardMedia
@@ -92,30 +95,94 @@ export default function SingleFestival() {
               <FestivalPicture cover_image={singleFestival.cover_image} />
             )}
           </CardMedia>
-          <Box className='info'>
+          <Box className='info' sx={{ marginLeft: '5vw', minWidth: '40vw' }}>
             <CardContent>
               <Typography
-                className='festival-heading'
-                variant='h5'
-                component='p'
-                style={{ font: 12, color: 'white' }}
+                className='font-link-title'
+                align='center'
+                component='div'
+                variant='header'
+                style={{
+                  width: '100%',
+                  position: 'relative',
+                  marginTop: '10vh',
+                  color: 'white',
+                }}
+                fontWeight='fontWeightMedium'
+                fontSize={70}
               >
                 {singleFestival?.name}
               </Typography>
 
-              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+              <Typography
+                className='font-link-head'
+                align='center'
+                component='div'
+                variant='header'
+                style={{
+                  width: '100%',
+                  position: 'relative',
+                  marginTop: '5vh',
+                  color: 'white',
+                }}
+                fontWeight='fontWeightMedium'
+                sx={{ fontSize: 22 }}
+                gutterBottom
+              >
                 Country: {singleFestival?.country}
               </Typography>
 
-              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+              <Typography
+                className='font-link-head'
+                align='center'
+                component='div'
+                variant='header'
+                style={{
+                  width: '100%',
+                  position: 'relative',
+                  marginTop: '2vh',
+                  color: 'white',
+                }}
+                fontWeight='fontWeightMedium'
+                sx={{ fontSize: 22 }}
+                gutterBottom
+              >
                 Month: {singleFestival?.month}
               </Typography>
 
-              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+              <Typography
+                className='font-link-head'
+                align='center'
+                component='div'
+                variant='header'
+                style={{
+                  width: '100%',
+                  position: 'relative',
+                  marginTop: '2vh',
+                  color: 'white',
+                }}
+                fontWeight='fontWeightMedium'
+                sx={{ fontSize: 22 }}
+                gutterBottom
+              >
                 Capacity: {singleFestival?.capacity}
               </Typography>
 
-              <Typography color='white' sx={{ fontSize: 15 }} gutterBottom>
+              <Typography
+                className='font-link-head'
+                align='center'
+                component='div'
+                variant='header'
+                style={{
+                  width: '100%',
+                  position: 'relative',
+                  marginTop: '2vh',
+                  color: 'white',
+                }}
+                fontWeight='fontWeightMedium'
+                sx={{ fontSize: 22 }}
+                gutterBottom
+              >
                 Cost: {singleFestival?.cost}
               </Typography>
 
@@ -123,7 +190,7 @@ export default function SingleFestival() {
                     {singleFestival.muscleGroup.name}
                   </Typography> */}
             </CardContent>
-            <CardActions>
+            <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button
                 className='Button'
                 type='submit'

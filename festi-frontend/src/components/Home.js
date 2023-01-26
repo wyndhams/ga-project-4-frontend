@@ -14,6 +14,7 @@ import {
 import { API } from '../lib/api';
 
 import '../styles/button.css';
+import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -150,6 +151,7 @@ const Home = () => {
     <>
       <div className={classes.image}></div>
       <Typography
+        className='font-link-title'
         align='center'
         component='div'
         variant='header'
@@ -160,11 +162,12 @@ const Home = () => {
           color: 'white',
         }}
         fontWeight='fontWeightMedium'
-        fontSize={50}
+        fontSize={70}
       >
         Welcome
       </Typography>
       <Typography
+        className='font-link-reg'
         align='center'
         component='div'
         variant='header'
@@ -174,10 +177,13 @@ const Home = () => {
           margin: '4vh',
           color: 'white',
         }}
-        fontSize={20}
+        fontSize={24}
       >
-        Looking for a new festival for the summer? We've got you covered... Use
-        the filters below and find the perfect festival for you!
+        Looking for a new festival for the summer? <br />
+        <br />
+        We've got you covered... <br />
+        <br />
+        Use the filters below and find the perfect festival for you!
       </Typography>
       {/* START OF FILTER FORM */}
 
@@ -352,6 +358,7 @@ const Home = () => {
           </Grid>
         </Grid>
         <Typography
+          className='font-link-title'
           align='center'
           component='div'
           variant='header'
@@ -426,7 +433,7 @@ const Home = () => {
               to='/festivals'
             >
               <Button
-                className='navigateButton'
+                className='font-link-title'
                 color='inherit'
                 variant='contained'
                 sx={{ marginLeft: '43px', minWidth: '150px' }}

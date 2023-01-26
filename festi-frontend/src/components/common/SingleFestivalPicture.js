@@ -13,7 +13,7 @@ export default function FestivalPicture({ cover_image }) {
 
   const myImage = cld.image(cover_image);
 
-  myImage.resize(thumbnail().width(800).height(800));
+  myImage.resize(thumbnail().width(700).height(700));
 
   return (
     <div>

@@ -10,6 +10,7 @@ import { useAuthenticated } from '../hooks/useAuthenticated';
 import Search from './common/Search';
 import FestivalPictureSmall from './common/FestivalPictureSmall';
 
+import '../App.css';
 import '../styles/button.css';
 
 const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
@@ -116,7 +117,6 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
               filterFestivals().map((festival) => (
                 <Grid item xs={6} key={festival.id}>
                   <Item
-                    className='hover'
                     onClick={() => handleClick(festival.id)}
                     sx={{
                       '&:hover': {
@@ -138,14 +138,25 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
                       margin: 0,
                     }}
                   >
-                    <Typography sx={{ color: 'white', mt: '12px' }}>
+                    <Typography
+                      className='font-link-reg'
+                      component='div'
+                      variant='header'
+                      style={{
+                        width: '100%',
+                        position: 'relative',
+                        color: 'white',
+                      }}
+                      fontWeight='fontWeightMedium'
+                      sx={{ color: 'white', mt: '12px' }}
+                    >
                       {festival.name}, {festival.country}
                     </Typography>
                     {isLoggedIn && (
                       <div key={festival.id}>
                         <Button
                           key={festival.id}
-                          className='Button'
+                          className='font-link-reg'
                           type='submit'
                           variant='contained'
                           color='inherit'
