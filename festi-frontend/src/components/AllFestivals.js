@@ -10,6 +10,8 @@ import { useAuthenticated } from '../hooks/useAuthenticated';
 import Search from './common/Search';
 import FestivalPictureSmall from './common/FestivalPictureSmall';
 
+import '../styles/button.css';
+
 const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -57,14 +59,14 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
 
   const handleCreateFestival = (e) => navigate('/festivals/create');
 
-  const handleFavourite = (festival) => {
+  const handleFavourite = (e) => {
     // if (!favourites.includes(festival)) {
     //   setFavourites([...favourites, festival]);
     // } else {
     //   setFavourites([...favourites.filter((item) => item !== festival)]);
     // }
     // setFavourites(...favourites, festival);
-    console.log(festival);
+    console.log(e);
   };
 
   return (
@@ -152,10 +154,6 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
                             borderRadius: '10px',
                             margin: '5px',
                             minWidth: '100px',
-                            '&:hover': {
-                              background: '#f00',
-                              color: 'white',
-                            },
                           }}
                           onClick={() => handleFavourite(festival)}
                         >

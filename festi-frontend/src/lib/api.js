@@ -5,6 +5,7 @@ const ENDPOINTS = {
   allFestivals: '/api/festivals/',
   singleFestival: (id) => `/api/festivals/${id}`,
   account: (userId) => `/api/account/${userId}`,
+  allGenres: '/api/genres/',
   createReview: (id) => `/api/festivals/${id}/reviews`,
   singleReview: (festivalId, reviewId) =>
     `/api/festivals/${festivalId}/reviews/${reviewId}`,

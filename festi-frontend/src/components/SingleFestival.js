@@ -37,7 +37,7 @@ export default function SingleFestival() {
     setIsUpdated(false);
   }, [id, isUpdated]);
 
-  const goToAllFestivals = () => navigate('/festivals');
+  const goBack = () => navigate(-1);
 
   const getRandomFestival = (e) => {
     e.preventDefault();
@@ -130,7 +130,7 @@ export default function SingleFestival() {
                 variant='contained'
                 color='inherit'
                 sx={{ margin: '5px' }}
-                onClick={goToAllFestivals}
+                onClick={goBack}
               >
                 Back
               </Button>

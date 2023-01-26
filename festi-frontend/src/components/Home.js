@@ -13,13 +13,15 @@ import {
 } from '@mui/material';
 import { API } from '../lib/api';
 
+import '../styles/button.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '10vh',
     display: 'flex',
+    position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(2),
   },
   topBottomRow: {
     height: '8vh',
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     minWidth: 120,
+    margin: 10,
   },
   textField: {
     width: 200,
@@ -57,12 +60,21 @@ const useStyles = makeStyles((theme) => ({
       zIndex: -1,
     },
   },
+  selected: {
+    backgroundColor: '#f00',
+    color: 'white',
+  },
+  notSelected: {
+    backgroundColor: 'white',
+    color: 'black',
+  },
 }));
 
 const Home = () => {
   const classes = useStyles();
   const [results, setResults] = useState([]);
   const [festivals, setFestivals] = useState(null);
+  const [genres, setGenres] = useState([]);
   const [filters, setFilters] = useState({
     genres: '',
     artists: '',
@@ -71,12 +83,25 @@ const Home = () => {
     month: '',
     capacity: '',
   });
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.allFestivals)
       .then(({ data }) => {
         setFestivals(data);
         console.log(API.ENDPOINTS.allFestivals);
+        console.log(data);
+      })
+      .catch(({ message, response }) => {
+        console.error(message, response);
+      });
+  }, []);
+
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.allGenres)
+      .then(({ data }) => {
+        setGenres(data);
+        console.log(API.ENDPOINTS.allGenres);
         console.log(data);
       })
       .catch(({ message, response }) => {
@@ -108,6 +133,17 @@ const Home = () => {
       return false;
     });
     setResults(filteredResults);
+  };
+
+  const handleSelect = (id) => {
+    if (selected.includes(id)) {
+      const newSelection = selected.filter((genreId) => genreId !== id);
+      setSelected(newSelection);
+      console.log(selected);
+    } else {
+      setSelected([...selected, id]);
+      console.log(selected);
+    }
   };
 
   return (
@@ -147,36 +183,8 @@ const Home = () => {
 
       <form onSubmit={handleSubmit}>
         <Grid container className={classes.root}>
-          <Grid item xs={6}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id='genres-label'>Genres</InputLabel>
-              <Select
-                labelId='genres-label'
-                id='genres'
-                name='genres'
-                value={filters.genres}
-                onChange={handleChange}
-                sx={{
-                  backgroundColor: 'white',
-                  border: '2px black solid',
-                  borderRadius: '10px',
-                  margin: '5px',
-                  minWidth: '100px',
-                }}
-              >
-                <MenuItem value=''>
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value='rock'>Rock</MenuItem>
-                <MenuItem value='pop'>Pop</MenuItem>
-                <MenuItem value='jazz'>Jazz</MenuItem>
-                <MenuItem value='blues'>Blues</MenuItem>
-                <MenuItem value='hip-hop'>Hip-Hop</MenuItem>
-                <MenuItem value='house'>House</MenuItem>
-                <MenuItem value='techno'>Techno</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
+          <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+            {/* <FormControl className={classes.formControl}>
               <InputLabel id='artists-label'>Artists</InputLabel>
               <Select
                 labelId='artists-label'
@@ -202,7 +210,7 @@ const Home = () => {
                 <MenuItem value='artist5'>Artist 5</MenuItem>
                 <MenuItem value='artist6'>Artist 6</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
             <FormControl className={classes.formControl}>
               <InputLabel id='country-label'>Country</InputLabel>
               <Select
@@ -227,9 +235,22 @@ const Home = () => {
                     {festival.country}
                   </MenuItem>
                 ))} */}
-                <MenuItem value='US'>US</MenuItem>
+                <MenuItem value='Albania'>Albania</MenuItem>
+                <MenuItem value='Belgium'>Belgium</MenuItem>
+                <MenuItem value='Bulgaria'>Bulgaria</MenuItem>
                 <MenuItem value='Canada'>Canada</MenuItem>
+                <MenuItem value='Colombia'>Colombia</MenuItem>
+                <MenuItem value='France'>France</MenuItem>
                 <MenuItem value='Germany'>Germany</MenuItem>
+                <MenuItem value='Italy'>Italy</MenuItem>
+                <MenuItem value='Netherlands'>Netherlands</MenuItem>
+                <MenuItem value='Portugal'>Portugal</MenuItem>
+                <MenuItem value='Romania'>Romania</MenuItem>
+                <MenuItem value='Serbia'>Serbia</MenuItem>
+                <MenuItem value='Slovenia'>Slovenia</MenuItem>
+                <MenuItem value='Spain'>Spain</MenuItem>
+                <MenuItem value='UK'>UK</MenuItem>
+                <MenuItem value='USA'>USA</MenuItem>
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -308,20 +329,95 @@ const Home = () => {
                 <MenuItem value=''>
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value='expensive'>Expensive</MenuItem>
-                <MenuItem value='medium'>Medium</MenuItem>
-                <MenuItem value='cheap'>Cheap</MenuItem>
+                {/* {festivals.map((festival) => (
+                  <MenuItem value={festival.id}>{
+                    festival.capacity
+                    }</MenuItem>
+                ))} */}
+                <MenuItem value='500 - 1k'>500 - 1k</MenuItem>
+                <MenuItem value='1k - 5k'>1k - 5k</MenuItem>
+                <MenuItem value='5k - 10k'>5k - 10k</MenuItem>
+                <MenuItem value='10k - 15k'>10k - 15k</MenuItem>
+                <MenuItem value='15k - 20k'>15k - 20k</MenuItem>
+                <MenuItem value='20k - 30k'>20k - 30k</MenuItem>
+                <MenuItem value='30k - 40k'>30k - 40k</MenuItem>
+                <MenuItem value='40k - 50k'>40k - 50k</MenuItem>
+                <MenuItem value='50k - 75k'>50k - 75k</MenuItem>
+                <MenuItem value='75k - 100k'>75k - 100k</MenuItem>
+                <MenuItem value='100k - 150k'>100k - 150k</MenuItem>
+                <MenuItem value='150k - 200k'>150k - 200k</MenuItem>
+                <MenuItem value='200k+'>200k+</MenuItem>
               </Select>
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container className={classes.root}>
+        <Typography
+          align='center'
+          component='div'
+          variant='header'
+          style={{
+            width: '100%',
+            position: 'relative',
+            marginTop: '1vh',
+            marginBottom: '1vh',
+            color: 'white',
+          }}
+          fontWeight='fontWeightMedium'
+          fontSize={38}
+        >
+          Select Genres
+        </Typography>
+        <Grid
+          container
+          spacing={1}
+          sx={{
+            justifyContent: 'center',
+            width: '50vw',
+            marginLeft: '25%',
+            mt: '8px',
+            mb: '8px',
+          }}
+        >
+          {genres.map((genre) => (
+            <Grid
+              Item
+              md={3}
+              sx={{ display: 'flex', justifyContent: 'center', width: '25%' }}
+            >
+              <Button
+                key={genre.id}
+                id={genre.id}
+                className={
+                  selected.includes(genre.id)
+                    ? classes.selected
+                    : classes.notSelected
+                }
+                type='submit'
+                variant='contained'
+                color='inherit'
+                sx={{
+                  border: '2px black solid',
+                  borderRadius: '10px',
+                  margin: '20px',
+                  minWidth: '130px',
+                }}
+                onClick={() => handleSelect(genre.id)}
+              >
+                {genre.name}
+              </Button>
+            </Grid>
+          ))}
+          {/* <Grid item xs>
+            <div className='grid-elements'></div>
+          </Grid> */}
+        </Grid>
+        <Grid sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}>
           <Grid item xs={2}>
             <Button
               type='submit'
               variant='contained'
               color='inherit'
-              sx={{ margin: '5px' }}
+              sx={{ marginRight: '43px', minWidth: '150px' }}
             >
               Search
             </Button>
@@ -330,10 +426,10 @@ const Home = () => {
               to='/festivals'
             >
               <Button
-                className='homeButton'
+                className='navigateButton'
                 color='inherit'
                 variant='contained'
-                sx={{ margin: '5px' }}
+                sx={{ marginLeft: '43px', minWidth: '150px' }}
               >
                 ALL FESTIVALS
               </Button>
