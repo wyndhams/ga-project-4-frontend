@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { IconButton } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import { API } from '../lib/api';
@@ -15,7 +17,7 @@ import '../App.css';
 import '../styles/button.css';
 
 const useStyles = makeStyles(() => ({
-  selected: {
+  root: {
     backgroundColor: '#f00',
     color: 'white',
   },
@@ -77,10 +79,10 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
     if (selected.includes(id)) {
       const newSelection = selected.filter((festivalId) => festivalId !== id);
       setSelected(newSelection);
-      console.log(selected);
+      console.log('SELECTED', selected);
     } else {
       setSelected([...selected, id]);
-      console.log(selected);
+      console.log('SELECTED', selected);
     }
   };
 
@@ -131,11 +133,6 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
               filterFestivals().map((festival) => (
                 <Grid item xs={6} key={festival.id}>
                   <Item
-                    className={
-                      selected.includes(festival.id)
-                        ? classes.selected
-                        : classes.notSelected
-                    }
                     onClick={() => handleClick(festival.id)}
                     sx={{
                       '&:hover': {
@@ -173,22 +170,26 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
                     </Typography>
                     {isLoggedIn && (
                       <div key={festival.id}>
-                        <Button
+                        <button
                           key={festival.id}
-                          className='font-link-reg'
-                          type='submit'
+                          className={
+                            selected.includes(festival.id)
+                              ? classes.root
+                              : classes.notSelected
+                          }
                           variant='contained'
                           color='inherit'
-                          sx={{
-                            border: '2px black solid',
-                            borderRadius: '10px',
-                            margin: '5px',
-                            minWidth: '100px',
-                          }}
-                          onClick={() => handleFavourite(festival)}
+                          // sx={{
+                          //   border: '2px black solid',
+                          //   borderRadius: '10px',
+                          //   margin: '5px',
+                          //   mt: 2,
+                          //   minWidth: '100px',
+                          // }}
+                          onClick={() => handleFavourite(festival.id)}
                         >
                           Favourite
-                        </Button>
+                        </button>
                       </div>
                     )}
                   </Container>

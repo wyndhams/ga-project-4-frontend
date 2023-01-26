@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import {
+  Card,
   FormControl,
   InputLabel,
   MenuItem,
@@ -15,6 +16,7 @@ import { API } from '../lib/api';
 
 import '../styles/button.css';
 import '../App.css';
+import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -403,7 +405,7 @@ const Home = () => {
               md={3}
               sx={{ display: 'flex', justifyContent: 'center', width: '25%' }}
             >
-              <Button
+              <button
                 key={genre.id}
                 id={genre.id}
                 className={
@@ -423,7 +425,7 @@ const Home = () => {
                 onClick={() => handleSelect(genre.id)}
               >
                 {genre.name}
-              </Button>
+              </button>
             </Grid>
           ))}
           {/* <Grid item xs>
@@ -436,7 +438,14 @@ const Home = () => {
               type='submit'
               variant='contained'
               color='inherit'
-              sx={{ marginRight: '43px', minWidth: '150px' }}
+              sx={{
+                marginRight: '43px',
+                minWidth: '150px',
+                '&:hover': {
+                  background: '#f00',
+                  color: 'white',
+                },
+              }}
             >
               Search
             </Button>
@@ -448,7 +457,14 @@ const Home = () => {
                 className='font-link-title'
                 color='inherit'
                 variant='contained'
-                sx={{ marginLeft: '43px', minWidth: '150px' }}
+                sx={{
+                  marginLeft: '43px',
+                  minWidth: '150px',
+                  '&:hover': {
+                    background: '#f00',
+                    color: 'white',
+                  },
+                }}
               >
                 ALL FESTIVALS
               </Button>

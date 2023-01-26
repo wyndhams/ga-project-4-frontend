@@ -27,8 +27,3 @@ code {
   top: 0;
   left: 0;
 }
-
-.selected {
-  background-color: #f00;
-  color: white;
-}
