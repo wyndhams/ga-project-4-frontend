@@ -1,17 +1,30 @@
-.selecteder {
+.favourite {
+  font-family: 'Michroma', sans-serif;
+  border: 1px black solid;
+  border-radius: 6px;
+  margin: 5px 0px;
+  min-width: 100px;
+  min-height: 40px;
   background-color: #f00;
   color: white;
 }
 
 button {
   font-family: 'Michroma', sans-serif;
+  font-size: '100px';
   border: 1px black solid;
-  border-radius: 10px;
+  border-radius: 6px;
   margin: 5px 0px;
   min-width: 100px;
   min-height: 40px;
 }
 
 button:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.favourite:hover {
+  background-color: rgb(255, 79, 79);
   cursor: pointer;
 }

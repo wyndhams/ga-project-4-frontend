@@ -27,6 +27,7 @@ export default function SingleFestival() {
   const [singleFestival, setSingleFestival] = useState(['']);
   const [newFestivals, setNewFestivals] = useState(['']);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [favourite, setFavourite] = useState(false);
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.singleFestival(id))
@@ -67,6 +68,14 @@ export default function SingleFestival() {
         navigate('/festivals');
       })
       .catch((e) => console.log(e));
+  };
+
+  const handleFavourite = (e) => {
+    if (favourite === false) {
+      setFavourite(true);
+    } else {
+      setFavourite(false);
+    }
   };
 
   return (
@@ -213,7 +222,14 @@ export default function SingleFestival() {
               </Button>
               {isLoggedIn && (
                 <>
-                  <Favourite />
+                  <button
+                    className={favourite ? '' : 'favourite'}
+                    variant='contained'
+                    color='inherit'
+                    onClick={() => handleFavourite()}
+                  >
+                    FAVOURITE
+                  </button>
                   <Button
                     className='Button'
                     type='submit'

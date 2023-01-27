@@ -173,22 +173,15 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
                         <button
                           key={festival.id}
                           className={
-                            selected.includes(festival.id)
+                            selected.includes(festival)
                               ? classes.root
                               : classes.notSelected
                           }
                           variant='contained'
                           color='inherit'
-                          // sx={{
-                          //   border: '2px black solid',
-                          //   borderRadius: '10px',
-                          //   margin: '5px',
-                          //   mt: 2,
-                          //   minWidth: '100px',
-                          // }}
-                          onClick={() => handleFavourite(festival.id)}
+                          onClick={() => handleFavourite(festival)}
                         >
-                          Favourite
+                          FAVOURITE
                         </button>
                       </div>
                     )}

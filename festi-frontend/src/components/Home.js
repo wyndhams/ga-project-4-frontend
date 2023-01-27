@@ -380,7 +380,7 @@ const Home = () => {
             width: '100%',
             position: 'relative',
             marginTop: '1vh',
-            marginBottom: '1vh',
+            marginBottom: '3vh',
             color: 'white',
           }}
           fontWeight='fontWeightMedium'

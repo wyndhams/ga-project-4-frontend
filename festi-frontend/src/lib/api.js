@@ -2,16 +2,20 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  allFestivals: '/api/festivals/',
-  singleFestival: (id) => `/api/festivals/${id}`,
-  account: (userId) => `/api/account/${userId}`,
-  allGenres: '/api/genres/',
-  createReview: (id) => `/api/festivals/${id}/reviews`,
+  allFestivals: `${process.env.REACT_APP_BASE_URL}/api/festivals/`,
+  singleFestival: (id) =>
+    `${process.env.REACT_APP_BASE_URL}/api/festivals/${id}/`,
+  account: (userId) =>
+    `${process.env.REACT_APP_BASE_URL}/api/account/${userId}`,
+  allGenres: `${process.env.REACT_APP_BASE_URL}/api/genres/`,
+  createReview: (id) =>
+    `${process.env.REACT_APP_BASE_URL}/api/festivals/${id}/reviews`,
   singleReview: (festivalId, reviewId) =>
-    `/api/festivals/${festivalId}/reviews/${reviewId}`,
-  login: '/api/auth/login/',
-  register: '/api/auth/register/',
-  search: (query) => `/api/festivals/search?search=${query}`,
+    `${process.env.REACT_APP_BASE_URL}/api/festivals/${festivalId}/reviews/${reviewId}`,
+  login: `${process.env.REACT_APP_BASE_URL}/api/auth/login/`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/auth/register/`,
+  search: (query) =>
+    `${process.env.REACT_APP_BASE_URL}/api/festivals/search?search=${query}`,
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload/`,
 };
 

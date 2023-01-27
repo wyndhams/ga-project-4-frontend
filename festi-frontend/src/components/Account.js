@@ -5,16 +5,11 @@ import { API } from '../lib/api';
 // import ProfilePic from '../assets/profile-pic.jpg';
 
 import {
-  // Container,
   Box,
-  // Card,
-  // CardContent,
-  // Button,
   Typography,
   Grid,
   Stack,
   Avatar,
-  // ImageListItem,
   ImageList,
   Table,
   TableBody,
