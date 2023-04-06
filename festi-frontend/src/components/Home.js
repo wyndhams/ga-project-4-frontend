@@ -434,7 +434,7 @@ const Home = () => {
         </Grid>
         <Grid sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}>
           <Grid item xs={2}>
-            <Button
+            {/* <Button
               type='submit'
               variant='contained'
               color='inherit'
@@ -448,7 +448,7 @@ const Home = () => {
               }}
             >
               Search
-            </Button>
+            </Button> */}
             <Link
               style={{ color: 'inherit', textDecoration: 'inherit' }}
               to='/festivals'
@@ -466,7 +466,7 @@ const Home = () => {
                   },
                 }}
               >
-                ALL FESTIVALS
+                FIND FESTIVALS
               </Button>
             </Link>
           </Grid>

@@ -75,13 +75,13 @@ const AllFestivals = ({ searchedFestivals, likedFestivals }) => {
 
   const handleCreateFestival = (e) => navigate('/festivals/create');
 
-  const handleFavourite = (id) => {
-    if (selected.includes(id)) {
-      const newSelection = selected.filter((festivalId) => festivalId !== id);
+  const handleFavourite = (festival) => {
+    if (selected.includes(festival)) {
+      const newSelection = selected.filter((i) => i !== festival);
       setSelected(newSelection);
       console.log('SELECTED', selected);
     } else {
-      setSelected([...selected, id]);
+      setSelected([...selected, festival]);
       console.log('SELECTED', selected);
     }
   };

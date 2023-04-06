@@ -226,7 +226,7 @@ export default function SingleFestival() {
                     className={favourite ? '' : 'favourite'}
                     variant='contained'
                     color='inherit'
-                    onClick={() => handleFavourite()}
+                    onClick={handleFavourite}
                   >
                     FAVOURITE
                   </button>

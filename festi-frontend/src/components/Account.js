@@ -56,7 +56,7 @@ const photoReel = [
   },
 ];
 
-const Account = ({ favourites }) => {
+const Account = ({}) => {
   const [festivals, setFestivals] = useState([]);
   const navigate = useNavigate();
 
@@ -116,7 +116,7 @@ const Account = ({ favourites }) => {
                       alt={item.title}
                       loading='lazy'
                     />
-                    <div>{favourites}</div>
+                    {/* <div>{festivals}</div> */}
                   </ImageListItem>
                 ))}
               </ImageList>
